@@ -1,8 +1,5 @@
-package clases;
+package classes;
 
 public class WeightConverter {
-	
-	
-	
-	
+
 }
