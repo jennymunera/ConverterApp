@@ -18,6 +18,7 @@ import java.awt.Component;
 import javax.swing.Box;
 import java.awt.CardLayout;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.Label;
 
 import javax.swing.GroupLayout;
@@ -31,10 +32,14 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import java.awt.Canvas;
+import javax.swing.JTextPane;
+import java.awt.Color;
+import javax.swing.JComboBox;
 
 public class ConverterWindow extends JFrame {
 
 	private JPanel panelPrincipal;
+	private JTextField amountTextField;
 
 
 	
@@ -57,7 +62,12 @@ public class ConverterWindow extends JFrame {
 
 
 
+	
+
+
+
 	private void starComponents() {
+		
 		
 		
 		setBounds(100, 100, 1024, 768);
@@ -94,12 +104,72 @@ public class ConverterWindow extends JFrame {
 		lblTitleCurrency.setBounds(6, 6, 517, 43);
 		panelCurrency.add(lblTitleCurrency);
 		
+		
 		JLabel lblimgCurrency = new JLabel("");
-		//ImageIcon img = new ImageIcon(this.getClass().getResource("/Users/jennymunera/Documents/GitHub/ConverterApp/ConverterApp/img/iconcurrency.png"));
-		//lblimgCurrency.setIcon(img);
-		lblimgCurrency.setBounds(215, 61, 100, 100);
+		lblimgCurrency.setAlignmentX(Component.CENTER_ALIGNMENT);
+		lblimgCurrency.setHorizontalAlignment(SwingConstants.CENTER);
+		lblimgCurrency.setBounds(210, 61, 100, 100);
 		panelCurrency.add(lblimgCurrency);
 		panelMenu.setLayout(null);
+		
+		ImageIcon icon = new ImageIcon("/Users/jennymunera/Documents/GitHub/ConverterApp/ConverterApp/img/Currencyicon.png");
+		Image img= icon.getImage();
+		Image imgScale = img.getScaledInstance(lblimgCurrency.getWidth(), lblimgCurrency.getHeight(),Image.SCALE_SMOOTH );
+		ImageIcon scaledIcon = new ImageIcon(imgScale);
+		lblimgCurrency.setIcon(scaledIcon);
+		
+		JLabel lblcantidad = new JLabel("Ingrese la cantidad a convertir");
+		lblcantidad.setFont(new Font("SansSerif", Font.PLAIN, 16));
+		lblcantidad.setEnabled(false);
+		lblcantidad.setHorizontalAlignment(SwingConstants.CENTER);
+		lblcantidad.setBounds(6, 194, 517, 16);
+		panelCurrency.add(lblcantidad);
+		
+		amountTextField = new JTextField();
+		amountTextField.setBackground(new Color(238, 238, 238));
+		amountTextField.setHorizontalAlignment(SwingConstants.CENTER);
+		amountTextField.setBounds(113, 232, 313, 43);
+		panelCurrency.add(amountTextField);
+		amountTextField.setColumns(10);
+		
+		JComboBox fromcurrencyComboBox = new JComboBox();
+		fromcurrencyComboBox.setFont(new Font("SansSerif", Font.PLAIN, 12));
+		fromcurrencyComboBox.setBounds(113, 327, 313, 43);
+		panelCurrency.add(fromcurrencyComboBox);
+		
+		JLabel lblcantidad1 = new JLabel("Tipo de Moneda Inicial: ");
+		lblcantidad1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblcantidad1.setFont(new Font("SansSerif", Font.PLAIN, 16));
+		lblcantidad1.setEnabled(false);
+		lblcantidad1.setBounds(6, 299, 517, 16);
+		panelCurrency.add(lblcantidad1);
+		
+		JButton btnexchange = new JButton("");
+		btnexchange.setBorder(new EmptyBorder(0, 0, 0, 0));
+		btnexchange.setBounds(224, 393, 86, 63);
+		panelCurrency.add(btnexchange);
+		
+		ImageIcon iconexchange = new ImageIcon("/Users/jennymunera/Documents/GitHub/ConverterApp/ConverterApp/img/exchange.png");
+		Image imgexchange= iconexchange.getImage();
+		Image imgScaleExchange = imgexchange.getScaledInstance(btnexchange.getWidth(), btnexchange.getHeight(),Image.SCALE_SMOOTH );
+		ImageIcon scaledIconExchange = new ImageIcon(imgScaleExchange);
+		btnexchange.setIcon(scaledIconExchange);
+		
+		JLabel lblcantidad2 = new JLabel("Tipo de Moneda a convertir:");
+		lblcantidad2.setHorizontalAlignment(SwingConstants.CENTER);
+		lblcantidad2.setFont(new Font("SansSerif", Font.PLAIN, 16));
+		lblcantidad2.setEnabled(false);
+		lblcantidad2.setBounds(6, 468, 517, 16);
+		panelCurrency.add(lblcantidad2);
+		
+		JComboBox toCurrencyComboBox = new JComboBox();
+		toCurrencyComboBox.setFont(new Font("SansSerif", Font.PLAIN, 12));
+		toCurrencyComboBox.setBounds(113, 513, 313, 43);
+		panelCurrency.add(toCurrencyComboBox);
+		
+		JLabel lblResultCurrency = new JLabel("");
+		lblResultCurrency.setBounds(6, 593, 517, 100);
+		panelCurrency.add(lblResultCurrency);
 		
 		
 		JLabel lblTitle = new JLabel("Converter APP");
@@ -121,10 +191,13 @@ public class ConverterWindow extends JFrame {
 		panelMenu.add(btnCurrency);
 		
 		
+		
 		JButton btnUnits = new JButton("Conversor de Unidades");
 		btnUnits.setBounds(6, 353, 218, 43);
 		panelMenu.add(btnUnits);
 		panelPrincipal.setLayout(gl_panelPrincipal);
+		
+		
 		
 	}
 }
