@@ -148,54 +148,58 @@ public class ConverterWindow extends JFrame {
 		lblcantidad.setFont(new Font("SansSerif", Font.PLAIN, 16));
 		lblcantidad.setEnabled(false);
 		lblcantidad.setHorizontalAlignment(SwingConstants.CENTER);
-		lblcantidad.setBounds(6, 194, 517, 16);
+		lblcantidad.setBounds(6, 173, 517, 20);
 		panelCurrency.add(lblcantidad);
 		
 		amountTextField = new JTextField();
 		amountTextField.setBackground(new Color(238, 238, 238));
 		amountTextField.setHorizontalAlignment(SwingConstants.CENTER);
-		amountTextField.setBounds(113, 232, 313, 43);
+		amountTextField.setBounds(113, 205, 313, 43);
 		panelCurrency.add(amountTextField);
 		amountTextField.setColumns(10);
 		
 		JComboBox fromcurrencyComboBox = new JComboBox();
 		fromcurrencyComboBox.setFont(new Font("SansSerif", Font.PLAIN, 12));
-		fromcurrencyComboBox.setBounds(113, 327, 313, 43);
+		fromcurrencyComboBox.setBounds(113, 288, 313, 43);
 		panelCurrency.add(fromcurrencyComboBox);
 		
 		JLabel lblcantidad1 = new JLabel("Tipo de Moneda Inicial: ");
 		lblcantidad1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblcantidad1.setFont(new Font("SansSerif", Font.PLAIN, 16));
 		lblcantidad1.setEnabled(false);
-		lblcantidad1.setBounds(6, 299, 517, 16);
+		lblcantidad1.setBounds(6, 260, 517, 16);
 		panelCurrency.add(lblcantidad1);
 		
-		JButton btnexchange = new JButton("");
-		btnexchange.setBorder(new EmptyBorder(0, 0, 0, 0));
-		btnexchange.setBounds(224, 393, 86, 63);
-		panelCurrency.add(btnexchange);
+		JButton invertButton = new JButton("");
+		invertButton.setBorder(new EmptyBorder(0, 0, 0, 0));
+		invertButton.setBounds(226, 343, 70, 70);
+		panelCurrency.add(invertButton);
 		
 		ImageIcon iconexchange = new ImageIcon("/Users/jennymunera/Documents/GitHub/ConverterApp/ConverterApp/img/exchange.png");
 		Image imgexchange= iconexchange.getImage();
-		Image imgScaleExchange = imgexchange.getScaledInstance(btnexchange.getWidth(), btnexchange.getHeight(),Image.SCALE_SMOOTH );
+		Image imgScaleExchange = imgexchange.getScaledInstance(invertButton.getWidth(), invertButton.getHeight(),Image.SCALE_SMOOTH );
 		ImageIcon scaledIconExchange = new ImageIcon(imgScaleExchange);
-		btnexchange.setIcon(scaledIconExchange);
+		invertButton.setIcon(scaledIconExchange);
 		
 		JLabel lblcantidad2 = new JLabel("Tipo de Moneda a convertir:");
 		lblcantidad2.setHorizontalAlignment(SwingConstants.CENTER);
 		lblcantidad2.setFont(new Font("SansSerif", Font.PLAIN, 16));
 		lblcantidad2.setEnabled(false);
-		lblcantidad2.setBounds(6, 468, 517, 16);
+		lblcantidad2.setBounds(6, 425, 517, 16);
 		panelCurrency.add(lblcantidad2);
 		
 		JComboBox toCurrencyComboBox = new JComboBox();
 		toCurrencyComboBox.setFont(new Font("SansSerif", Font.PLAIN, 12));
-		toCurrencyComboBox.setBounds(113, 513, 313, 43);
+		toCurrencyComboBox.setBounds(113, 460, 313, 43);
 		panelCurrency.add(toCurrencyComboBox);
 		
 		JLabel lblResultCurrency = new JLabel("");
 		lblResultCurrency.setBounds(6, 593, 517, 100);
 		panelCurrency.add(lblResultCurrency);
+		
+		JButton convertButton = new JButton("Convertir");
+		convertButton.setBounds(210, 530, 117, 29);
+		panelCurrency.add(convertButton);
 		
 		
 		// componentes del conversor de temperatura 

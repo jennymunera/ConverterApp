@@ -1,6 +1,6 @@
 package appconverter;
 
-import classes.CurrencyConverter;
+import classes.CurrencyApi;
 import classes.LengthConverter;
 import classes.TemperatureConverter;
 import classes.WeightConverter;
@@ -8,7 +8,7 @@ import gui.ConverterWindow;
 
 public class Application {
 	
-	CurrencyConverter currencyConverter;
+	CurrencyApi currencyConverter;
 	LengthConverter lengthConverter;
 	TemperatureConverter temperatureConverter; 
 	WeightConverter weightConverter;
@@ -18,7 +18,7 @@ public class Application {
 		
 		showWindow();
 		
-		currencyConverter = new CurrencyConverter();
+		currencyConverter = new CurrencyApi();
 		lengthConverter = new LengthConverter();
 		temperatureConverter = new TemperatureConverter();
 		weightConverter = new WeightConverter();
