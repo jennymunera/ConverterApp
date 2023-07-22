@@ -60,12 +60,6 @@ public class ConverterWindow extends JFrame {
 		
 	}
 
-
-
-	
-
-
-
 	private void starComponents() {
 		
 		
@@ -96,7 +90,39 @@ public class ConverterWindow extends JFrame {
 						.addComponent(panelCurrency, GroupLayout.DEFAULT_SIZE, 724, Short.MAX_VALUE))
 					.addContainerGap())
 		);
+		
 		panelCurrency.setLayout(null);
+		
+		
+		/// componentes del menu principal
+		
+		JLabel lblTitle = new JLabel("Converter APP");
+		lblTitle.setFont(new Font("SansSerif", Font.BOLD, 24));
+		lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTitle.setBounds(6, 177, 218, 36);
+		panelMenu.add(lblTitle);
+		
+		
+		JLabel lblMenu = new JLabel("Menú Principal");
+		lblMenu.setFont(new Font("SansSerif", Font.PLAIN, 14));
+		lblMenu.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMenu.setBounds(6, 238, 218, 16);
+		panelMenu.add(lblMenu);
+		
+		
+		JButton btnCurrency = new JButton("Conversor de Moneda");
+		btnCurrency.setBounds(6, 301, 218, 43);
+		panelMenu.add(btnCurrency);
+		
+		
+		
+		JButton btnUnits = new JButton("Conversor de Unidades");
+		btnUnits.setBounds(6, 353, 218, 43);
+		panelMenu.add(btnUnits);
+		panelPrincipal.setLayout(gl_panelPrincipal);
+		
+		
+		/// componentes del conversor de moneda 
 		
 		JLabel lblTitleCurrency = new JLabel("CONVERSOR DE MONEDA");
 		lblTitleCurrency.setHorizontalAlignment(SwingConstants.CENTER);
@@ -172,30 +198,10 @@ public class ConverterWindow extends JFrame {
 		panelCurrency.add(lblResultCurrency);
 		
 		
-		JLabel lblTitle = new JLabel("Converter APP");
-		lblTitle.setFont(new Font("SansSerif", Font.BOLD, 24));
-		lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTitle.setBounds(6, 177, 218, 36);
-		panelMenu.add(lblTitle);
-		
-		
-		JLabel lblMenu = new JLabel("Menú Principal");
-		lblMenu.setFont(new Font("SansSerif", Font.PLAIN, 14));
-		lblMenu.setHorizontalAlignment(SwingConstants.CENTER);
-		lblMenu.setBounds(6, 238, 218, 16);
-		panelMenu.add(lblMenu);
-		
-		
-		JButton btnCurrency = new JButton("Conversor de Moneda");
-		btnCurrency.setBounds(6, 301, 218, 43);
-		panelMenu.add(btnCurrency);
+		// componentes del conversor de temperatura 
 		
 		
 		
-		JButton btnUnits = new JButton("Conversor de Unidades");
-		btnUnits.setBounds(6, 353, 218, 43);
-		panelMenu.add(btnUnits);
-		panelPrincipal.setLayout(gl_panelPrincipal);
 		
 		
 		
