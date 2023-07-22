@@ -18,93 +18,113 @@ import java.awt.Component;
 import javax.swing.Box;
 import java.awt.CardLayout;
 import java.awt.GridLayout;
+import java.awt.Label;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.ImageIcon;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JTextField;
+import java.awt.Canvas;
 
 public class ConverterWindow extends JFrame {
 
 	private JPanel panelPrincipal;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ConverterWindow frame = new ConverterWindow();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
-	/**
-	 * Create the frame.
-	 */
+	
+	
+	
 	public ConverterWindow() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 990, 600);
+		
+		starComponents();
+		
+		setTitle("CHALLENGE CONVERSOR ALURA LATAM/ORACLE"); 
+		setResizable(false);
+		setLocationRelativeTo(null); // centrar la aplicacion 
+		
+		
+		
+		
+		
+	}
+
+
+
+	private void starComponents() {
+		
+		
+		setBounds(100, 100, 1024, 768);
 		panelPrincipal = new JPanel();
 		panelPrincipal.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(panelPrincipal);
 		
-		JPanel panel = new JPanel();
+		JPanel panelMenu = new JPanel();
 		
-		JPanel panel_1 = new JPanel();
+		JPanel panelCurrency = new JPanel();
 		GroupLayout gl_panelPrincipal = new GroupLayout(panelPrincipal);
 		gl_panelPrincipal.setHorizontalGroup(
 			gl_panelPrincipal.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panelPrincipal.createSequentialGroup()
-					.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 224, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(panel, GroupLayout.DEFAULT_SIZE, 744, Short.MAX_VALUE))
+					.addComponent(panelMenu, GroupLayout.PREFERRED_SIZE, 224, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, 136, Short.MAX_VALUE)
+					.addComponent(panelCurrency, GroupLayout.PREFERRED_SIZE, 529, GroupLayout.PREFERRED_SIZE)
+					.addGap(125))
 		);
 		gl_panelPrincipal.setVerticalGroup(
-			gl_panelPrincipal.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, gl_panelPrincipal.createSequentialGroup()
-					.addGroup(gl_panelPrincipal.createParallelGroup(Alignment.TRAILING)
-						.addGroup(gl_panelPrincipal.createSequentialGroup()
-							.addGap(1)
-							.addComponent(panel, GroupLayout.DEFAULT_SIZE, 555, Short.MAX_VALUE))
-						.addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 562, Short.MAX_VALUE))
+			gl_panelPrincipal.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_panelPrincipal.createSequentialGroup()
+					.addGroup(gl_panelPrincipal.createParallelGroup(Alignment.LEADING)
+						.addComponent(panelMenu, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 724, Short.MAX_VALUE)
+						.addComponent(panelCurrency, GroupLayout.DEFAULT_SIZE, 724, Short.MAX_VALUE))
 					.addContainerGap())
 		);
-		panel_1.setLayout(null);
+		panelCurrency.setLayout(null);
+		
+		JLabel lblTitleCurrency = new JLabel("CONVERSOR DE MONEDA");
+		lblTitleCurrency.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTitleCurrency.setFont(new Font("SansSerif", Font.PLAIN, 26));
+		lblTitleCurrency.setBounds(6, 6, 517, 43);
+		panelCurrency.add(lblTitleCurrency);
+		
+		JLabel lblimgCurrency = new JLabel("");
+		//ImageIcon img = new ImageIcon(this.getClass().getResource("/Users/jennymunera/Documents/GitHub/ConverterApp/ConverterApp/img/iconcurrency.png"));
+		//lblimgCurrency.setIcon(img);
+		lblimgCurrency.setBounds(215, 61, 100, 100);
+		panelCurrency.add(lblimgCurrency);
+		panelMenu.setLayout(null);
+		
 		
 		JLabel lblTitle = new JLabel("Converter APP");
 		lblTitle.setFont(new Font("SansSerif", Font.BOLD, 24));
 		lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTitle.setBounds(6, 177, 218, 36);
-		panel_1.add(lblTitle);
+		panelMenu.add(lblTitle);
+		
 		
 		JLabel lblMenu = new JLabel("Menú Principal");
 		lblMenu.setFont(new Font("SansSerif", Font.PLAIN, 14));
 		lblMenu.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMenu.setBounds(6, 238, 218, 16);
-		panel_1.add(lblMenu);
+		panelMenu.add(lblMenu);
+		
 		
 		JButton btnCurrency = new JButton("Conversor de Moneda");
-		btnCurrency.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		btnCurrency.setBounds(6, 301, 218, 43);
-		panel_1.add(btnCurrency);
+		panelMenu.add(btnCurrency);
+		
 		
 		JButton btnUnits = new JButton("Conversor de Unidades");
 		btnUnits.setBounds(6, 353, 218, 43);
-		panel_1.add(btnUnits);
-		panel.setLayout(null);
+		panelMenu.add(btnUnits);
 		panelPrincipal.setLayout(gl_panelPrincipal);
+		
 	}
 }
