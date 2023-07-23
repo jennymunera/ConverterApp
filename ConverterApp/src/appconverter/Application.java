@@ -8,7 +8,7 @@ import gui.ConverterWindow;
 
 public class Application {
 	
-	CurrencyApi currencyConverter;
+	CurrencyApi currencyApi;
 	LengthConverter lengthConverter;
 	TemperatureConverter temperatureConverter; 
 	WeightConverter weightConverter;
@@ -16,18 +16,22 @@ public class Application {
 	
 	public Application() {
 		
-		showWindow();
-		
-		currencyConverter = new CurrencyApi();
+		currencyApi = new CurrencyApi();
 		lengthConverter = new LengthConverter();
 		temperatureConverter = new TemperatureConverter();
 		weightConverter = new WeightConverter();
+		
+		showWindow();
+		
+		
 	}
 
 
 	private void showWindow() {
-		ConverterWindow converterWindow = new ConverterWindow(); 
+		ConverterWindow converterWindow = new ConverterWindow(currencyApi); 
 		converterWindow.setVisible(true);
+		converterWindow.setResizable(false);
+		converterWindow.setLocationRelativeTo(null); // centrar la aplicacion
 		
 	}
 }
