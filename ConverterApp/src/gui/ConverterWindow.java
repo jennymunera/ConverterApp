@@ -1,14 +1,9 @@
 package gui;
 
-import java.awt.EventQueue;
-
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
 import java.awt.Component;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -28,6 +23,15 @@ import javax.swing.JComboBox;
 
 import classes.CurrencyApi;
 import javax.swing.JTextPane;
+import java.awt.Panel;
+import javax.swing.JLayeredPane;
+import javax.swing.JDesktopPane;
+import javax.swing.border.EtchedBorder;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.LineBorder;
+import java.awt.Choice;
+import javax.swing.UIManager;
 
 
 public class ConverterWindow extends JFrame {
@@ -38,24 +42,29 @@ public class ConverterWindow extends JFrame {
 	private JComboBox<String> fromcurrencyComboBox;
 	private JComboBox<String> toCurrencyComboBox;
 	private CurrencyApi currencyApi;
+	private JTextField TextLength;
+	private JTextField textTemp;
+	private JTextField textWeight;
 
 	public ConverterWindow(CurrencyApi currencyApi) {
 		this.currencyApi = currencyApi;
+		
+		// TODO DESCOMENTAR todo lo relacionado con panelImage y lbllblImagenInicio
 
-		// configurar JFrame
+///////// configurar JFrame 
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("CHALLENGE CONVERSOR ALURA LATAM/ORACLE");
-
 		setBounds(100, 100, 1024, 768);
+		
+		
 		panelPrincipal = new JPanel();
 		panelPrincipal.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(panelPrincipal);
 		
 		
-
 		JPanel panelMenu = new JPanel();
-
+		
 		JPanel panelCurrency = new JPanel();
 		panelCurrency.setVisible(false);
 		panelCurrency.setLayout(null);
@@ -64,9 +73,9 @@ public class ConverterWindow extends JFrame {
 		panelUnits.setVisible(false);
 		panelUnits.setLayout(null);
 		
-		JPanel panelImage = new JPanel();
-		panelImage.setVisible(true);
-		panelImage.setLayout(null);
+		//JPanel panelImage = new JPanel();
+		//panelImage.setVisible(true);  
+		//panelImage.setLayout(null);
 		
 		GroupLayout gl_panelPrincipal = new GroupLayout(panelPrincipal);
 		gl_panelPrincipal.setHorizontalGroup(
@@ -74,7 +83,7 @@ public class ConverterWindow extends JFrame {
 				.addGroup(gl_panelPrincipal.createSequentialGroup()
 					.addComponent(panelMenu, GroupLayout.PREFERRED_SIZE, 224, GroupLayout.PREFERRED_SIZE)
 					.addGap(12)
-					.addComponent(panelImage, GroupLayout.PREFERRED_SIZE, 780, GroupLayout.PREFERRED_SIZE)
+					//.addComponent(panelImage, GroupLayout.PREFERRED_SIZE, 780, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(panelUnits, GroupLayout.PREFERRED_SIZE, 773, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -88,26 +97,29 @@ public class ConverterWindow extends JFrame {
 						.addComponent(panelMenu, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 724, Short.MAX_VALUE)
 						.addComponent(panelCurrency, GroupLayout.DEFAULT_SIZE, 724, Short.MAX_VALUE)
 						.addComponent(panelUnits, GroupLayout.DEFAULT_SIZE, 724, Short.MAX_VALUE)
-						.addComponent(panelImage, GroupLayout.DEFAULT_SIZE, 724, Short.MAX_VALUE))
-					.addContainerGap())
+						//.addComponent(panelImage, GroupLayout.DEFAULT_SIZE, 724, Short.MAX_VALUE))
+					).addContainerGap())
 		);
 		
 		
+		
+		/*
 		JLabel lblImagenInicio = new JLabel("");
+		lblImagenInicio.setOpaque(true);
+		lblImagenInicio.setFocusTraversalPolicyProvider(true);
 		lblImagenInicio.setBounds(0, 0, 774, 718);
 		lblImagenInicio.setHorizontalTextPosition(SwingConstants.CENTER);
-		panelImage.add(lblImagenInicio);
+		//panelImage.add(lblImagenInicio);
 		
 		ImageIcon iconInicio = new ImageIcon("/Users/jennymunera/Documents/GitHub/ConverterApp/ConverterApp/img/challengeImage.jpg"); 
 		Image imgInicio = iconInicio.getImage();
 		Image imgScaledInicio = imgInicio.getScaledInstance(lblImagenInicio.getWidth(), lblImagenInicio.getHeight(), Image.SCALE_SMOOTH);
 		ImageIcon ScaledIconInicio = new ImageIcon(imgScaledInicio);
 		lblImagenInicio.setIcon(ScaledIconInicio);
-		
-		
-		
+		*/
+			
 
-		/// componentes del menu principal
+////////// componentes del menu principal
 
 		JLabel lblTitle = new JLabel("Converter APP");
 		lblTitle.setFont(new Font("SansSerif", Font.BOLD, 24));
@@ -115,7 +127,7 @@ public class ConverterWindow extends JFrame {
 		lblTitle.setBounds(6, 177, 218, 36);
 		panelMenu.add(lblTitle);
 
-		JLabel lblMenu = new JLabel("Menú Principal");
+		JButton lblMenu = new JButton("Menú Principal");
 		lblMenu.setFont(new Font("SansSerif", Font.PLAIN, 14));
 		lblMenu.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMenu.setBounds(6, 238, 218, 16);
@@ -132,7 +144,7 @@ public class ConverterWindow extends JFrame {
 		
 		
 
-		/// componentes del conversor de moneda
+///////// componentes del conversor de moneda
 
 		JLabel lblTitleCurrency = new JLabel("CONVERSOR DE MONEDA");
 		lblTitleCurrency.setHorizontalAlignment(SwingConstants.CENTER);
@@ -219,13 +231,221 @@ public class ConverterWindow extends JFrame {
 		panelCurrency.add(textResult);
 		
 		
+////////componentes del conversor de longitud
+		JPanel panelLength = new JPanel();
+		panelLength.setBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(0, 0, 0), null));
+		panelLength.setBounds(421, 6, 316, 347);
+		panelUnits.add(panelLength);
+		panelLength.setLayout(null);
+		
+		JLabel lblLength = new JLabel("LONGITUD");
+		lblLength.setFont(new Font("SansSerif", Font.PLAIN, 16));
+		lblLength.setHorizontalAlignment(SwingConstants.CENTER);
+		lblLength.setBounds(6, 6, 304, 23);
+		panelLength.add(lblLength);
+		
+		TextLength = new JTextField();
+		TextLength.setFont(new Font("SansSerif", Font.PLAIN, 13));
+		TextLength.setBounds(16, 54, 283, 35);
+		panelLength.add(TextLength);
+		TextLength.setColumns(10);
+		
+		JLabel lblLength1 = new JLabel("Ingrese el valor de longitud");
+		lblLength1.setFont(new Font("SansSerif", Font.PLAIN, 13));
+		lblLength1.setEnabled(false);
+		lblLength1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblLength1.setBounds(6, 37, 304, 16);
+		panelLength.add(lblLength1);
+		
+		JLabel lblLength2 = new JLabel("Unidad de longitud inicial");
+		lblLength2.setEnabled(false);
+		lblLength2.setHorizontalAlignment(SwingConstants.CENTER);
+		lblLength2.setFont(new Font("SansSerif", Font.PLAIN, 13));
+		lblLength2.setBounds(6, 94, 304, 23);
+		panelLength.add(lblLength2);
+		
+		JComboBox LengthUnits1 = new JComboBox();
+		LengthUnits1.setFont(new Font("SansSerif", Font.PLAIN, 13));
+		LengthUnits1.setBounds(16, 120, 283, 27);
+		panelLength.add(LengthUnits1);
+		
+		JButton btnInverLeng = new JButton("");
+		btnInverLeng.setBounds(137, 146, 40, 40);
+		panelLength.add(btnInverLeng);
+		
+		JLabel lblLength3 = new JLabel("Unidad de Longitud final");
+		lblLength3.setFont(new Font("SansSerif", Font.PLAIN, 13));
+		lblLength3.setHorizontalAlignment(SwingConstants.CENTER);
+		lblLength3.setEnabled(false);
+		lblLength3.setBounds(6, 187, 304, 16);
+		panelLength.add(lblLength3);
+		
+		JComboBox LengthUnits2 = new JComboBox();
+		LengthUnits2.setFont(new Font("SansSerif", Font.PLAIN, 13));
+		LengthUnits2.setBounds(6, 213, 283, 27);
+		panelLength.add(LengthUnits2);
+		
+		JTextPane textResutlLength = new JTextPane();
+		textResutlLength.setFont(new Font("SansSerif", Font.PLAIN, 13));
+		textResutlLength.setBackground(new Color(238, 238, 238));
+		textResutlLength.setBounds(6, 280, 304, 50);
+		panelLength.add(textResutlLength);
+		
+		JButton btnConvertLength = new JButton("Convertir");
+		btnConvertLength.setFont(new Font("SansSerif", Font.PLAIN, 13));
+		btnConvertLength.setBounds(103, 241, 117, 29);
+		panelLength.add(btnConvertLength);
+		
+////////componentes conversor de temperatura		
+		JPanel panelTemp = new JPanel();
+		panelTemp.setLayout(null);
+		panelTemp.setBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(0, 0, 0), null));
+		panelTemp.setBounds(47, 6, 316, 347);
+		panelUnits.add(panelTemp);
+		
+		JLabel lblTemp = new JLabel("TEMPERATURA");
+		lblTemp.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTemp.setFont(new Font("SansSerif", Font.PLAIN, 16));
+		lblTemp.setBounds(6, 6, 304, 23);
+		panelTemp.add(lblTemp);
+		
+		textTemp = new JTextField();
+		textTemp.setFont(new Font("SansSerif", Font.PLAIN, 13));
+		textTemp.setColumns(10);
+		textTemp.setBounds(16, 54, 283, 35);
+		panelTemp.add(textTemp);
+		
+		JLabel lblTemp1 = new JLabel("Ingrese el valor de temperatura");
+		lblTemp1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTemp1.setFont(new Font("SansSerif", Font.PLAIN, 13));
+		lblTemp1.setEnabled(false);
+		lblTemp1.setBounds(6, 37, 304, 16);
+		panelTemp.add(lblTemp1);
+		
+		JLabel lblTemp2 = new JLabel("Unidad de temperatura inicial");
+		lblTemp2.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTemp2.setFont(new Font("SansSerif", Font.PLAIN, 13));
+		lblTemp2.setEnabled(false);
+		lblTemp2.setBounds(6, 94, 304, 23);
+		panelTemp.add(lblTemp2);
+		
+		JComboBox TempUnits1 = new JComboBox();
+		TempUnits1.setFont(new Font("SansSerif", Font.PLAIN, 13));
+		TempUnits1.setBounds(16, 117, 283, 27);
+		panelTemp.add(TempUnits1);
+		
+		JButton btnInvertemp = new JButton("");
+		btnInvertemp.setBounds(137, 143, 40, 40);
+		panelTemp.add(btnInvertemp);
+		
+		JLabel lblTemp3 = new JLabel("Unidad de temperatura final");
+		lblTemp3.setFont(new Font("SansSerif", Font.PLAIN, 13));
+		lblTemp3.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTemp3.setEnabled(false);
+		lblTemp3.setBounds(6, 186, 304, 16);
+		panelTemp.add(lblTemp3);
+		
+		JComboBox TempUnits2 = new JComboBox();
+		TempUnits2.setFont(new Font("SansSerif", Font.PLAIN, 13));
+		TempUnits2.setBounds(16, 213, 283, 27);
+		panelTemp.add(TempUnits2);
+		
+		JTextPane textResultTemp = new JTextPane();
+		textResultTemp.setFont(new Font("SansSerif", Font.PLAIN, 13));
+		textResultTemp.setBackground(UIManager.getColor("Button.background"));
+		textResultTemp.setBounds(6, 280, 304, 50);
+		panelTemp.add(textResultTemp);
+		
+		JButton btnconverTemp = new JButton("Convertir");
+		btnconverTemp.setFont(new Font("SansSerif", Font.PLAIN, 13));
+		btnconverTemp.setBounds(100, 241, 117, 29);
+		panelTemp.add(btnconverTemp);
+		
+////////componentes conversor de masa
+		
+		JPanel panelWeight = new JPanel();
+		panelWeight.setLayout(null);
+		panelWeight.setBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(0, 0, 0), null));
+		panelWeight.setBounds(230, 365, 316, 347);
+		panelUnits.add(panelWeight);
+		
+		JLabel lblWeight = new JLabel("MASA");
+		lblWeight.setHorizontalAlignment(SwingConstants.CENTER);
+		lblWeight.setFont(new Font("SansSerif", Font.PLAIN, 16));
+		lblWeight.setBounds(6, 6, 304, 23);
+		panelWeight.add(lblWeight);
+		
+		textWeight = new JTextField();
+		textWeight.setFont(new Font("SansSerif", Font.PLAIN, 13));
+		textWeight.setColumns(10);
+		textWeight.setBounds(16, 54, 283, 35);
+		panelWeight.add(textWeight);
+		
+		JLabel lblWeight1 = new JLabel("Ingrese el valor");
+		lblWeight1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblWeight1.setFont(new Font("SansSerif", Font.PLAIN, 13));
+		lblWeight1.setEnabled(false);
+		lblWeight1.setBounds(6, 37, 304, 16);
+		panelWeight.add(lblWeight1);
+		
+		JLabel lblLWeight2 = new JLabel("Unidad de masa inicial");
+		lblLWeight2.setHorizontalAlignment(SwingConstants.CENTER);
+		lblLWeight2.setFont(new Font("SansSerif", Font.PLAIN, 13));
+		lblLWeight2.setEnabled(false);
+		lblLWeight2.setBounds(6, 94, 304, 23);
+		panelWeight.add(lblLWeight2);
+		
+		JComboBox WeightUnits1 = new JComboBox();
+		WeightUnits1.setFont(new Font("SansSerif", Font.PLAIN, 13));
+		WeightUnits1.setBounds(16, 120, 283, 27);
+		panelWeight.add(WeightUnits1);
+		
+		JButton btnInverWeight = new JButton("");
+		btnInverWeight.setBounds(137, 146, 40, 40);
+		panelWeight.add(btnInverWeight);
+		
+		JLabel lblWeight3 = new JLabel("Unidad de masa final");
+		lblWeight3.setHorizontalAlignment(SwingConstants.CENTER);
+		lblWeight3.setFont(new Font("SansSerif", Font.PLAIN, 13));
+		lblWeight3.setEnabled(false);
+		lblWeight3.setBounds(6, 187, 304, 16);
+		panelWeight.add(lblWeight3);
+		
+		JComboBox WeightUnits2 = new JComboBox();
+		WeightUnits2.setFont(new Font("SansSerif", Font.PLAIN, 13));
+		WeightUnits2.setBounds(6, 213, 283, 27);
+		panelWeight.add(WeightUnits2);
+		
+		JTextPane textResutlWeight = new JTextPane();
+		textResutlWeight.setFont(new Font("SansSerif", Font.PLAIN, 13));
+		textResutlWeight.setBackground(UIManager.getColor("Button.background"));
+		textResutlWeight.setBounds(6, 280, 304, 50);
+		panelWeight.add(textResutlWeight);
+		
+		JButton btnConvertWeight = new JButton("Convertir");
+		btnConvertWeight.setFont(new Font("SansSerif", Font.PLAIN, 13));
+		btnConvertWeight.setBounds(103, 241, 117, 29);
+		panelWeight.add(btnConvertWeight);
+		
+		
+/////////Eventos de los paneles y componentes 		
+
 		// Eventos de los botones del menu principal
+		 lblMenu.addActionListener(new ActionListener() {
+		        @Override
+		        public void actionPerformed(ActionEvent e) {
+		        //	panelImage.setVisible(true);
+		            panelCurrency.setVisible(false);
+		            panelUnits.setVisible(false);
+		        }
+		    });
+		
 		
 		//evento boton menu convertir moneda
 	    btnCurrency.addActionListener(new ActionListener() {
 	        @Override
 	        public void actionPerformed(ActionEvent e) {
-	        	panelImage.setVisible(false);
+	        	//panelImage.setVisible(false);
 	            panelCurrency.setVisible(true);
 	            panelUnits.setVisible(false);
 	        }
@@ -237,11 +457,11 @@ public class ConverterWindow extends JFrame {
 	        public void actionPerformed(ActionEvent e) {
 	            panelUnits.setVisible(true);
 	            panelCurrency.setVisible(false);
-	            panelImage.setVisible(false);
+	           // panelImage.setVisible(false);
 	        }
 	    });
 
-		// Eventos del conversor de moneda
+	// Eventos del conversor de moneda
 
 		// ActionListener para el botón de inversión (invertButton)
 		convertButton.addActionListener(new ActionListener() {
@@ -287,8 +507,8 @@ public class ConverterWindow extends JFrame {
 			}
 		});
 		
-		
-		
 
+		
+		
 	}// fin del constructor
 }// fin de la clase
