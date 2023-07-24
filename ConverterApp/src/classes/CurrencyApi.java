@@ -88,7 +88,7 @@ public class CurrencyApi {
     	 Map<String, String> currencyInfo = new HashMap<>();
 
     	 Properties properties = new Properties();
-         try (FileInputStream fis = new FileInputStream("/Users/jennymunera/eclipse-workspace/ConsumoApi/src/config/currency_info.properties")) {
+         try (FileInputStream fis = new FileInputStream("/Users/jennymunera/Documents/GitHub/ConverterApp/ConverterApp/src/config/currency_info.properties")) {
              properties.load(fis);
          } catch (IOException e) {
              e.printStackTrace();

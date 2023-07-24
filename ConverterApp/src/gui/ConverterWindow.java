@@ -4,6 +4,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Component;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -22,11 +24,15 @@ import java.awt.Color;
 import javax.swing.JComboBox;
 
 import classes.CurrencyApi;
+import classes.TemperatureConverter;
+
 import javax.swing.JTextPane;
 import javax.swing.border.BevelBorder;
 import javax.swing.UIManager;
 import javax.swing.border.SoftBevelBorder;
 import java.awt.Toolkit;
+import javax.swing.DefaultComboBoxModel;
+import java.awt.Cursor;
 
 
 public class ConverterWindow extends JFrame {
@@ -40,6 +46,9 @@ public class ConverterWindow extends JFrame {
 	private JTextField TextLength;
 	private JTextField textTemp;
 	private JTextField textWeight;
+	private TemperatureConverter temperatureConverter;
+	private JComboBox<String>TempUnits1;
+	private JComboBox<String>TempUnits2;
 
 	public ConverterWindow(CurrencyApi currencyApi) {
 		this.currencyApi = currencyApi;
@@ -124,6 +133,7 @@ public class ConverterWindow extends JFrame {
 		panelMenu.add(lblTitle);
 
 		JButton lblMenu = new JButton("Menú Principal");
+		lblMenu.setBorder(new EmptyBorder(0, 0, 0, 0));
 		lblMenu.setFont(new Font("SansSerif", Font.PLAIN, 14));
 		lblMenu.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMenu.setBounds(6, 238, 218, 16);
@@ -154,6 +164,14 @@ public class ConverterWindow extends JFrame {
 		lblimgCurrency.setBounds(210, 61, 100, 100);
 		panelCurrency.add(lblimgCurrency);
 		panelMenu.setLayout(null);
+		
+		JButton btnFinish = new JButton("Finalizar Programa");
+		btnFinish.setBorder(new EmptyBorder(0, 0, 0, 0));
+		btnFinish.setFont(new Font("SansSerif", Font.ITALIC, 13));
+		
+		
+		btnFinish.setBounds(6, 408, 212, 43);
+		panelMenu.add(btnFinish);
 
 		ImageIcon icon = new ImageIcon(
 				"/Users/jennymunera/Documents/GitHub/ConverterApp/ConverterApp/img/Currencyicon.png");
@@ -333,7 +351,8 @@ public class ConverterWindow extends JFrame {
 		lblTemp2.setBounds(6, 94, 304, 23);
 		panelTemp.add(lblTemp2);
 		
-		JComboBox TempUnits1 = new JComboBox();
+		TempUnits1 = new JComboBox<>();
+		TempUnits1.setModel(new DefaultComboBoxModel<String>(new String[] {"ºC - Celsius", "ºF - Fahrenheit ", "ºK - Kelvin"}));
 		TempUnits1.setFont(new Font("SansSerif", Font.PLAIN, 13));
 		TempUnits1.setBounds(16, 117, 283, 27);
 		panelTemp.add(TempUnits1);
@@ -357,7 +376,9 @@ public class ConverterWindow extends JFrame {
 		lblTemp3.setBounds(6, 186, 304, 16);
 		panelTemp.add(lblTemp3);
 		
-		JComboBox TempUnits2 = new JComboBox();
+		TempUnits2 = new JComboBox<>();
+		TempUnits2.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+		TempUnits2.setModel(new DefaultComboBoxModel<String>(new String[] {"ºC - Celsius", "ºF - Fahrenheit ", "ºK - Kelvin"}));
 		TempUnits2.setFont(new Font("SansSerif", Font.PLAIN, 13));
 		TempUnits2.setBounds(16, 213, 283, 27);
 		panelTemp.add(TempUnits2);
@@ -484,7 +505,7 @@ public class ConverterWindow extends JFrame {
 	        }
 	    });
 
-	// Eventos del conversor de moneda
+///////// Eventos del conversor de moneda
 
 		// ActionListener para el botón de inversión (invertButton)
 		convertButton.addActionListener(new ActionListener() {
@@ -493,7 +514,17 @@ public class ConverterWindow extends JFrame {
 				// Obtiene los datos ingresados por el usuario
 				String fromCurrency = getCurrencyCode(fromcurrencyComboBox.getSelectedItem().toString());
 				String toCurrency = getCurrencyCode(toCurrencyComboBox.getSelectedItem().toString());
-				double amount = Double.parseDouble(amountTextField.getText());
+				
+				
+			    double amount = 0.0;
+			    
+			    try {
+		            amount = Double.parseDouble(amountTextField.getText());
+		        } catch (NumberFormatException ex) {
+		            // Si no se ingresó un número válido, mostrar un mensaje de error
+		            JOptionPane.showMessageDialog(null, "Error: Ingrese solo números en el campo de cantidad.", "Error de entrada", JOptionPane.ERROR_MESSAGE);
+		            return;
+		        }
 
 				// Realiza la conversión utilizando el valor de cambio de las monedas
 				double fromRate = currencyApi.getExchangeRate(fromCurrency);
@@ -503,7 +534,7 @@ public class ConverterWindow extends JFrame {
 				// Redondear convertedAmount a tres decimales
 				DecimalFormat df = new DecimalFormat("#.###");
 				convertedAmount = Double.parseDouble(df.format(convertedAmount));
-
+ 
 
 				// Muestra el resultado de la conversión 
 				// JOptionPane.showMessageDialog(null, amount + " " + fromCurrency + " = " + convertedAmount + " " + toCurrency);
@@ -530,8 +561,105 @@ public class ConverterWindow extends JFrame {
 			}
 		});
 		
+///////////Eventos Conversor de temperatura
+		
+		
+		textTemp.addActionListener(new ActionListener() {
+		    @Override
+		    public void actionPerformed(ActionEvent e) {
+		        convertTemperature(temperatureConverter);
+		    }
+		});
 
+		TempUnits1.addActionListener(new ActionListener() {
+		    @Override
+		    public void actionPerformed(ActionEvent e) {
+		        convertTemperature(temperatureConverter);
+		    }
+		});
+
+		TempUnits2.addActionListener(new ActionListener() {
+		    @Override
+		    public void actionPerformed(ActionEvent e) {
+		        convertTemperature(temperatureConverter);
+		    }
+		});
+		
+		//ActionListener para el boton convertir Temperatura
+		btnconverTemp.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String tempInput = textTemp.getText();
+			    if (tempInput.isEmpty()) {
+			    textResultTemp.setText("");
+			        return; // No hay nada que convertir si el campo de texto está vacío
+			    }
+
+			    double tempValue;
+			    try {
+			        tempValue = Double.parseDouble(tempInput);
+			    } catch (NumberFormatException ex) {
+			    	JOptionPane.showMessageDialog(null, "Error: Ingrese solo números en el campo de cantidad.", "Error de entrada", JOptionPane.ERROR_MESSAGE);
+			        return;
+			    }
+				
+	                String selectedUnit1 = TempUnits1.getSelectedItem().toString();
+	                String selectedUnit2 = TempUnits2.getSelectedItem().toString();
+	                
+	                if(selectedUnit1.equals(selectedUnit2)){
+	                	JOptionPane.showMessageDialog(null,"No se puede convertir a la misma unidad de temperatura, verifica las selecciones","Error de unidades",JOptionPane.ERROR_MESSAGE);
+	                }else{
+
+	                double result = 0.0;
+
+	                if (selectedUnit1.equals("ºC - Celsius")) {
+	                    if (selectedUnit2.equals("ºF - Fahrenheit ")) {
+	                        result = TemperatureConverter.celsiusToFahrenheit(tempValue);
+	                    } else if (selectedUnit2.equals("ºK - Kelvin")) {
+	                        result = TemperatureConverter.celsiusToKelvin(tempValue);
+	                    }
+	                } else if (selectedUnit1.equals("ºF - Fahrenheit ")) {
+	                    if (selectedUnit2.equals("ºC - Celsius")) {
+	                        result = TemperatureConverter.fahrenheitToCelsius(tempValue);
+	                    } else if (selectedUnit2.equals("ºK - Kelvin")) {
+	                        result = TemperatureConverter.fahrenheitToKelvin(tempValue);
+	                    }
+	                } else if (selectedUnit1.equals("ºK - Kelvin")) {
+	                    if (selectedUnit2.equals("ºC - Celsius")) {
+	                        result = TemperatureConverter.kelvinToCelsius(tempValue);
+	                    } else if (selectedUnit2.equals("ºF - Fahrenheit ")) {
+	                        result = TemperatureConverter.kelvinToFahrenheit(tempValue);
+	                    }
+	                }
+
+	                textResultTemp.setText("la temperatura ingresada: "+tempValue+" "+selectedUnit1+" es igual a: "+String.valueOf(result)+ " "+selectedUnit2);
+	            }
+			}
+		});
+		
+		btnInvertemp.addActionListener(new ActionListener() {
+		    @Override
+		    public void actionPerformed(ActionEvent e) {
+		        // Intercambiar las selecciones de los JComboBox
+		        int selectedIndex1 = TempUnits1.getSelectedIndex();
+		        int selectedIndex2 = TempUnits2.getSelectedIndex();
+
+		        TempUnits1.setSelectedIndex(selectedIndex2);
+		        TempUnits2.setSelectedIndex(selectedIndex1);
+
+		        // Actualizar el resultado con la nueva configuración
+		        convertTemperature(temperatureConverter);
+		    }
+		});
+		
+//////// Eventos conversor de longitud 
+		
 		
 		
 	}// fin del constructor
+
+	public void convertTemperature(TemperatureConverter temperatureConverter) {
+		this.temperatureConverter = temperatureConverter;
+		
+	}
 }// fin de la clase

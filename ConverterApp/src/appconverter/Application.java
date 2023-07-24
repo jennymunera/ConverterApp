@@ -27,11 +27,14 @@ public class Application {
 	}
 
 
+
 	private void showWindow() {
 		ConverterWindow converterWindow = new ConverterWindow(currencyApi); 
+		converterWindow.convertTemperature(temperatureConverter);
 		converterWindow.setVisible(true);
 		converterWindow.setResizable(false);
-		converterWindow.setLocationRelativeTo(null); // centrar la aplicacion
-		
+		converterWindow.setLocationRelativeTo(null); // centrar la aplicacion	
 	}
+	
+	
 }
