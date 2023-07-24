@@ -23,15 +23,10 @@ import javax.swing.JComboBox;
 
 import classes.CurrencyApi;
 import javax.swing.JTextPane;
-import java.awt.Panel;
-import javax.swing.JLayeredPane;
-import javax.swing.JDesktopPane;
-import javax.swing.border.EtchedBorder;
 import javax.swing.border.BevelBorder;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.LineBorder;
-import java.awt.Choice;
 import javax.swing.UIManager;
+import javax.swing.border.SoftBevelBorder;
+import java.awt.Toolkit;
 
 
 public class ConverterWindow extends JFrame {
@@ -49,6 +44,8 @@ public class ConverterWindow extends JFrame {
 	public ConverterWindow(CurrencyApi currencyApi) {
 		this.currencyApi = currencyApi;
 		
+		
+
 		// TODO DESCOMENTAR todo lo relacionado con panelImage y lbllblImagenInicio
 
 ///////// configurar JFrame 
@@ -102,7 +99,6 @@ public class ConverterWindow extends JFrame {
 		);
 		
 		
-		
 		/*
 		JLabel lblImagenInicio = new JLabel("");
 		lblImagenInicio.setOpaque(true);
@@ -117,7 +113,7 @@ public class ConverterWindow extends JFrame {
 		ImageIcon ScaledIconInicio = new ImageIcon(imgScaledInicio);
 		lblImagenInicio.setIcon(ScaledIconInicio);
 		*/
-			
+		
 
 ////////// componentes del menu principal
 
@@ -233,7 +229,7 @@ public class ConverterWindow extends JFrame {
 		
 ////////componentes del conversor de longitud
 		JPanel panelLength = new JPanel();
-		panelLength.setBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(0, 0, 0), null));
+		panelLength.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		panelLength.setBounds(421, 6, 316, 347);
 		panelUnits.add(panelLength);
 		panelLength.setLayout(null);
@@ -270,8 +266,16 @@ public class ConverterWindow extends JFrame {
 		panelLength.add(LengthUnits1);
 		
 		JButton btnInverLeng = new JButton("");
+		btnInverLeng.setBorder(new EmptyBorder(0, 0, 0, 0));
 		btnInverLeng.setBounds(137, 146, 40, 40);
 		panelLength.add(btnInverLeng);
+		ImageIcon iconinvertLeng = new ImageIcon(
+				"/Users/jennymunera/Documents/GitHub/ConverterApp/ConverterApp/img/exchange.png");
+		Image imginvertleng = iconinvertLeng.getImage();
+		Image imgScaleinvertleng = imginvertleng.getScaledInstance(btnInverLeng.getWidth(), btnInverLeng.getHeight(),
+				Image.SCALE_SMOOTH);
+		ImageIcon scaledInvertleng = new ImageIcon(imgScaleinvertleng);
+		btnInverLeng.setIcon(scaledInvertleng);
 		
 		JLabel lblLength3 = new JLabel("Unidad de Longitud final");
 		lblLength3.setFont(new Font("SansSerif", Font.PLAIN, 13));
@@ -298,8 +302,8 @@ public class ConverterWindow extends JFrame {
 		
 ////////componentes conversor de temperatura		
 		JPanel panelTemp = new JPanel();
+		panelTemp.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		panelTemp.setLayout(null);
-		panelTemp.setBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(0, 0, 0), null));
 		panelTemp.setBounds(47, 6, 316, 347);
 		panelUnits.add(panelTemp);
 		
@@ -335,8 +339,16 @@ public class ConverterWindow extends JFrame {
 		panelTemp.add(TempUnits1);
 		
 		JButton btnInvertemp = new JButton("");
+		btnInvertemp.setBorder(new EmptyBorder(0, 0, 0, 0));
 		btnInvertemp.setBounds(137, 143, 40, 40);
 		panelTemp.add(btnInvertemp);
+		ImageIcon iconinvertemp = new ImageIcon(
+				"/Users/jennymunera/Documents/GitHub/ConverterApp/ConverterApp/img/exchange.png");
+		Image imginverttemp = iconinvertemp.getImage();
+		Image imgScaleinvertemp = imginverttemp.getScaledInstance(btnInvertemp.getWidth(), btnInvertemp.getHeight(),
+				Image.SCALE_SMOOTH);
+		ImageIcon scaledInvertemp = new ImageIcon(imgScaleinvertemp);
+		btnInvertemp.setIcon(scaledInvertemp);
 		
 		JLabel lblTemp3 = new JLabel("Unidad de temperatura final");
 		lblTemp3.setFont(new Font("SansSerif", Font.PLAIN, 13));
@@ -364,9 +376,9 @@ public class ConverterWindow extends JFrame {
 ////////componentes conversor de masa
 		
 		JPanel panelWeight = new JPanel();
+		panelWeight.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		panelWeight.setLayout(null);
-		panelWeight.setBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(0, 0, 0), null));
-		panelWeight.setBounds(230, 365, 316, 347);
+		panelWeight.setBounds(47, 371, 316, 347);
 		panelUnits.add(panelWeight);
 		
 		JLabel lblWeight = new JLabel("MASA");
@@ -401,8 +413,16 @@ public class ConverterWindow extends JFrame {
 		panelWeight.add(WeightUnits1);
 		
 		JButton btnInverWeight = new JButton("");
+		btnInverWeight.setBorder(new EmptyBorder(0, 0, 0, 0));
 		btnInverWeight.setBounds(137, 146, 40, 40);
 		panelWeight.add(btnInverWeight);
+		ImageIcon iconinverweight = new ImageIcon(
+				"/Users/jennymunera/Documents/GitHub/ConverterApp/ConverterApp/img/exchange.png");
+		Image imginvertweight = iconinverweight.getImage();
+		Image imgScaleinverweight = imginvertweight.getScaledInstance(btnInverWeight.getWidth(), btnInverWeight.getHeight(),
+				Image.SCALE_SMOOTH);
+		ImageIcon scaledInverweight= new ImageIcon(imgScaleinverweight);
+		btnInverWeight.setIcon(scaledInverweight);
 		
 		JLabel lblWeight3 = new JLabel("Unidad de masa final");
 		lblWeight3.setHorizontalAlignment(SwingConstants.CENTER);
@@ -427,10 +447,13 @@ public class ConverterWindow extends JFrame {
 		btnConvertWeight.setBounds(103, 241, 117, 29);
 		panelWeight.add(btnConvertWeight);
 		
+	
+			
+		
 		
 /////////Eventos de los paneles y componentes 		
 
-		// Eventos de los botones del menu principal
+	// Eventos de los botones del menu principal
 		 lblMenu.addActionListener(new ActionListener() {
 		        @Override
 		        public void actionPerformed(ActionEvent e) {
