@@ -21,12 +21,12 @@ import org.json.JSONObject;
 public class CurrencyApi {
 
 	private static JSONObject exchangeRates;
-	private Map<String, String> currencyInfo; // Información sobre las monedas (código -> nombre completo)
+	private Map<String, String> currencyInfo; 
 
 
 	public CurrencyApi() {
 		exchangeRates = getExchangeRatesFromAPI();
-		currencyInfo = loadCurrencyInfoFromProperties(); // Cargamos la información desde el archivo CSV
+		currencyInfo = loadCurrencyInfoFromProperties(); 
 	}
 
 	
@@ -35,13 +35,9 @@ public class CurrencyApi {
 		HttpURLConnection conn = null;
 
 		try {
-			// Lee la API key desde el archivo de configuración
+			
 			String apiKey = readApiKeyFromConfig();
-
-			// Construir la URL de la API
 			String apiUrl = "https://v6.exchangerate-api.com/v6/" + apiKey + "/latest/USD";
-
-			// Realizar la solicitud HTTP
 			URL url = new URL(apiUrl);
 			conn = (HttpURLConnection) url.openConnection();
 			conn.setRequestMethod("GET");
@@ -109,7 +105,7 @@ public class CurrencyApi {
              List<String> currencyNames = new ArrayList<>();
              while (keys.hasNext()) {
                  String currencyCode = keys.next();
-                 String currencyName = currencyInfo.get(currencyCode); // Obtenemos el nombre completo desde el mapa
+                 String currencyName = currencyInfo.get(currencyCode); 
                  if (currencyName != null) {
                      currencyNames.add(currencyCode + " - " + currencyName);
                  }

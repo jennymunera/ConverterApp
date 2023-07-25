@@ -24,36 +24,44 @@ import java.awt.Color;
 import javax.swing.JComboBox;
 
 import classes.CurrencyApi;
+import classes.LengthConverter;
 import classes.TemperatureConverter;
+import classes.WeightConverter;
 
 import javax.swing.JTextPane;
 import javax.swing.border.BevelBorder;
 import javax.swing.UIManager;
 import javax.swing.border.SoftBevelBorder;
-import java.awt.Toolkit;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.Cursor;
 
 
 public class ConverterWindow extends JFrame {
 
+	private CurrencyApi currencyApi;
+	private TemperatureConverter temperatureConverter;
+	private LengthConverter lengthConverter;
+	private WeightConverter weightConverter;
+	
 	private static final long serialVersionUID = 1L;
 	private JPanel panelPrincipal;
 	private JTextField amountTextField;
 	private JComboBox<String> fromcurrencyComboBox;
 	private JComboBox<String> toCurrencyComboBox;
-	private CurrencyApi currencyApi;
 	private JTextField TextLength;
 	private JTextField textTemp;
 	private JTextField textWeight;
-	private TemperatureConverter temperatureConverter;
 	private JComboBox<String>TempUnits1;
 	private JComboBox<String>TempUnits2;
-
+	private JComboBox<String>LengthUnits1;
+	private JComboBox<String>LengthUnits2;
+	private JComboBox<String>WeightUnits1;
+	private JComboBox<String>WeightUnits2;
+	
+	
+	
 	public ConverterWindow(CurrencyApi currencyApi) {
 		this.currencyApi = currencyApi;
-		
-		
 
 		// TODO DESCOMENTAR todo lo relacionado con panelImage y lbllblImagenInicio
 
@@ -278,7 +286,9 @@ public class ConverterWindow extends JFrame {
 		lblLength2.setBounds(6, 94, 304, 23);
 		panelLength.add(lblLength2);
 		
-		JComboBox LengthUnits1 = new JComboBox();
+		
+		LengthUnits1 = new JComboBox<>();
+		LengthUnits1.setModel(new DefaultComboBoxModel<String>(new String[] {"Metros", "Pulgadas", "Pies", "Kilómetros", "Millas", "Centímetros", "Milímetros"}));
 		LengthUnits1.setFont(new Font("SansSerif", Font.PLAIN, 13));
 		LengthUnits1.setBounds(16, 120, 283, 27);
 		panelLength.add(LengthUnits1);
@@ -302,9 +312,10 @@ public class ConverterWindow extends JFrame {
 		lblLength3.setBounds(6, 187, 304, 16);
 		panelLength.add(lblLength3);
 		
-		JComboBox LengthUnits2 = new JComboBox();
+		LengthUnits2 = new JComboBox<>();
+		LengthUnits2.setModel(new DefaultComboBoxModel<String>(new String[] {"Metros", "Pulgadas", "Pies", "Kilómetros", "Millas", "Centímetros", "Milímetros"}));
 		LengthUnits2.setFont(new Font("SansSerif", Font.PLAIN, 13));
-		LengthUnits2.setBounds(6, 213, 283, 27);
+		LengthUnits2.setBounds(16, 215, 283, 27);
 		panelLength.add(LengthUnits2);
 		
 		JTextPane textResutlLength = new JTextPane();
@@ -428,7 +439,8 @@ public class ConverterWindow extends JFrame {
 		lblLWeight2.setBounds(6, 94, 304, 23);
 		panelWeight.add(lblLWeight2);
 		
-		JComboBox WeightUnits1 = new JComboBox();
+		WeightUnits1 = new JComboBox<>();
+		WeightUnits1.setModel(new DefaultComboBoxModel<String>(new String[] {"Kilogramos", "Libras", "Onzas", "Gramos", "Miligramos", "Toneladas"}));
 		WeightUnits1.setFont(new Font("SansSerif", Font.PLAIN, 13));
 		WeightUnits1.setBounds(16, 120, 283, 27);
 		panelWeight.add(WeightUnits1);
@@ -452,9 +464,10 @@ public class ConverterWindow extends JFrame {
 		lblWeight3.setBounds(6, 187, 304, 16);
 		panelWeight.add(lblWeight3);
 		
-		JComboBox WeightUnits2 = new JComboBox();
+		WeightUnits2 = new JComboBox<>();
+		WeightUnits2.setModel(new DefaultComboBoxModel<String>(new String[] {"Kilogramos", "Libras", "Onzas", "Gramos", "Miligramos", "Toneladas"}));
 		WeightUnits2.setFont(new Font("SansSerif", Font.PLAIN, 13));
-		WeightUnits2.setBounds(6, 213, 283, 27);
+		WeightUnits2.setBounds(16, 215, 283, 27);
 		panelWeight.add(WeightUnits2);
 		
 		JTextPane textResutlWeight = new JTextPane();
@@ -505,9 +518,10 @@ public class ConverterWindow extends JFrame {
 	        }
 	    });
 
+	    
 ///////// Eventos del conversor de moneda
 
-		// ActionListener para el botón de inversión (invertButton)
+		
 		convertButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -547,7 +561,7 @@ public class ConverterWindow extends JFrame {
 			}
 		});
 
-		// ActionListener para el botón de inversión (invertButton)
+		
 		invertButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -560,6 +574,7 @@ public class ConverterWindow extends JFrame {
 				toCurrencyComboBox.setSelectedItem(selectedFromCurrency);
 			}
 		});
+
 		
 ///////////Eventos Conversor de temperatura
 		
@@ -585,7 +600,6 @@ public class ConverterWindow extends JFrame {
 		    }
 		});
 		
-		//ActionListener para el boton convertir Temperatura
 		btnconverTemp.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -651,15 +665,186 @@ public class ConverterWindow extends JFrame {
 		        convertTemperature(temperatureConverter);
 		    }
 		});
+
 		
 //////// Eventos conversor de longitud 
+		
+		TextLength.addActionListener(new ActionListener() {
+		    @Override
+		    public void actionPerformed(ActionEvent e) {
+		    	convertLength(lengthConverter);
+		    }
+		});
+
+		LengthUnits1.addActionListener(new ActionListener() {
+		    @Override
+		    public void actionPerformed(ActionEvent e) {
+		    	convertLength(lengthConverter);
+		    }
+		});
+
+		LengthUnits2.addActionListener(new ActionListener() {
+		    @Override
+		    public void actionPerformed(ActionEvent e) {
+		    	convertLength(lengthConverter);
+		    }
+		});
+		
+		btnConvertLength.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+		            double inputValue = Double.parseDouble(TextLength.getText());
+		            String fromUnit = (String) LengthUnits1.getSelectedItem();
+		            String toUnit = (String) LengthUnits2.getSelectedItem();
+
+		            if (fromUnit.equals(toUnit)) {
+		            	JOptionPane.showMessageDialog(null,"No se puede convertir a la misma unidad de longitud, verifica las selecciones","Error de unidades",JOptionPane.ERROR_MESSAGE);
+		                return;
+		            }
+		            double result = LengthConverter.convertLength(inputValue, fromUnit, toUnit);
+
+		         
+		            textResutlLength.setText("La Longitud ingresada: "+inputValue + "  " + fromUnit + " corresponde a = " + result + " " + toUnit);
+		        } catch (NumberFormatException ex) {
+		        	JOptionPane.showMessageDialog(null, "Error: Ingrese solo números en el campo de cantidad.", "Error de entrada", JOptionPane.ERROR_MESSAGE);
+		        }catch (IllegalArgumentException ex) {
+		        	JOptionPane.showMessageDialog(null,ex.getMessage());
+		        }
+				
+			}
+		});
+		
+		btnInverLeng.addActionListener(new ActionListener() {
+		    @Override
+		    public void actionPerformed(ActionEvent e) {
+		        // Intercambiar las selecciones de los JComboBox
+		        int fromUnit = LengthUnits1.getSelectedIndex();
+		        int toUnit = LengthUnits2.getSelectedIndex();
+
+		        LengthUnits1.setSelectedIndex(toUnit);
+		        LengthUnits2.setSelectedIndex(fromUnit);
+
+		        
+		        convertLength(lengthConverter);
+		    }
+		});
+
+		
+////////Eventos conversor de Peso 
+		textWeight.addActionListener(new ActionListener() {
+		    @Override
+		    public void actionPerformed(ActionEvent e) {
+		    	convertWeight(weightConverter);
+		    }
+		});
+
+		WeightUnits1.addActionListener(new ActionListener() {
+		    @Override
+		    public void actionPerformed(ActionEvent e) {
+		    	convertWeight(weightConverter);
+		    }
+		});
+
+		WeightUnits2.addActionListener(new ActionListener() {
+		    @Override
+		    public void actionPerformed(ActionEvent e) {
+		    	convertWeight(weightConverter);
+		    }
+		});
+		
+		btnConvertWeight.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String weightInput = textWeight.getText();
+			    if (weightInput.isEmpty()) {
+			    	textResutlWeight.setText("");
+			        return; 
+			    }
+
+			    double weightValue;
+			    try {
+			    	weightValue = Double.parseDouble(weightInput);
+			    } catch (NumberFormatException ex) {
+			    	JOptionPane.showMessageDialog(null, "Error: Ingrese solo números en el campo de cantidad.", "Error de entrada", JOptionPane.ERROR_MESSAGE);
+			        return;
+			    }
+				
+	                String selectedWeight1 = WeightUnits1.getSelectedItem().toString();
+	                String selectedWeight2 = WeightUnits2.getSelectedItem().toString();
+	                
+	                if(selectedWeight1.equals(selectedWeight2)){
+	                	JOptionPane.showMessageDialog(null,"No se puede convertir a la misma unidad de masa, verifica las selecciones","Error de unidades",JOptionPane.ERROR_MESSAGE);
+	                }else{
+
+	                double result = 0.0;
+
+	                if (selectedWeight1.equals("Kilogramos") && selectedWeight2.equals("Libras")) {
+	                    result = WeightConverter.convertKilogramsToPounds(weightValue);
+	                } else if (selectedWeight1.equals("Libras") && selectedWeight2.equals("Kilogramos")) {
+	                    result = WeightConverter.convertPoundsToKilograms(weightValue);
+	                } else if (selectedWeight1.equals("Kilogramos") && selectedWeight2.equals("Onzas")) {
+	                    result = WeightConverter.convertKilogramsToOunces(weightValue);
+	                } else if (selectedWeight1.equals("Onzas") && selectedWeight2.equals("Kilogramos")) {
+	                    result = WeightConverter.convertOuncesToKilograms(weightValue);
+	                } else if (selectedWeight1.equals("Kilogramos") && selectedWeight2.equals("Gramos")) {
+	                    result = WeightConverter.convertKilogramsToGrams(weightValue);
+	                } else if (selectedWeight1.equals("Gramos") && selectedWeight2.equals("Kilogramos")) {
+	                    result = WeightConverter.convertGramsToKilograms(weightValue);
+	                } else if (selectedWeight1.equals("Kilogramos") && selectedWeight2.equals("Miligramos")) {
+	                    result = WeightConverter.convertKilogramsToMilligrams(weightValue);
+	                } else if (selectedWeight1.equals("Miligramos") && selectedWeight2.equals("Kilogramos")) {
+	                    result = WeightConverter.convertMilligramsToKilograms(weightValue);
+	                } else if (selectedWeight1.equals("Kilogramos") && selectedWeight2.equals("Toneladas")) {
+	                    result = WeightConverter.convertKilogramsToTons(weightValue);
+	                } else if (selectedWeight1.equals("Toneladas") && selectedWeight2.equals("Kilogramos")) {
+	                    result = WeightConverter.convertTonsToKilograms(weightValue);
+	                } else {
+	                    // If the input and output units are the same, no conversion is needed.
+	                    result = weightValue;
+	                }
+
+	                textResutlWeight.setText("la masa ingresada: "+weightValue+" "+selectedWeight1+" es igual a: "+String.valueOf(result)+ " "+selectedWeight2);
+	            }
+			}
+		});
+		
+		btnInverWeight.addActionListener(new ActionListener() {
+		    @Override
+		    public void actionPerformed(ActionEvent e) {
+		        // Intercambiar las selecciones de los JComboBox
+		        int selectedWeight1 = WeightUnits1.getSelectedIndex();
+		        int selectedWeight2 = WeightUnits2.getSelectedIndex();
+
+		        WeightUnits1.setSelectedIndex(selectedWeight2);
+		        WeightUnits2.setSelectedIndex(selectedWeight1);
+
+		        
+		        convertWeight(weightConverter);
+		    }
+		});
+
 		
 		
 		
 	}// fin del constructor
 
+	
+	
 	public void convertTemperature(TemperatureConverter temperatureConverter) {
 		this.temperatureConverter = temperatureConverter;
 		
 	}
+
+	public void convertLength(LengthConverter lengthConverter) {
+		this.lengthConverter= lengthConverter;
+		
+	}
+
+	public void convertWeight(WeightConverter weightConverter) {
+		this.weightConverter = weightConverter;
+		
+	}
+	
+	
 }// fin de la clase

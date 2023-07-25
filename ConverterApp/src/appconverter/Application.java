@@ -31,9 +31,12 @@ public class Application {
 	private void showWindow() {
 		ConverterWindow converterWindow = new ConverterWindow(currencyApi); 
 		converterWindow.convertTemperature(temperatureConverter);
+		converterWindow.convertLength(lengthConverter);
+		converterWindow.convertWeight(weightConverter);
+		
 		converterWindow.setVisible(true);
 		converterWindow.setResizable(false);
-		converterWindow.setLocationRelativeTo(null); // centrar la aplicacion	
+		converterWindow.setLocationRelativeTo(null); 
 	}
 	
 	
