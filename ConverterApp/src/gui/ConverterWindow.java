@@ -31,9 +31,7 @@ import classes.TemperatureConverter;
 import classes.WeightConverter;
 
 import javax.swing.JTextPane;
-import javax.swing.border.BevelBorder;
 import javax.swing.UIManager;
-import javax.swing.border.SoftBevelBorder;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.Cursor;
 import javax.swing.border.LineBorder;
