@@ -18,6 +18,8 @@ import javax.swing.ImageIcon;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.SwingConstants;
 import java.awt.Font;
+import java.awt.Graphics;
+
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import java.awt.Color;
@@ -34,6 +36,7 @@ import javax.swing.UIManager;
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.Cursor;
+import javax.swing.border.LineBorder;
 
 
 public class ConverterWindow extends JFrame {
@@ -70,23 +73,43 @@ public class ConverterWindow extends JFrame {
 		setTitle("CHALLENGE CONVERSOR ALURA LATAM/ORACLE");
 		setBounds(100, 100, 1024, 768);
 		
+		// Configurar la imagen de fondo en el panelPrincipal
+        ImageIcon backgroundImage = new ImageIcon("/Users/jennymunera/Documents/GitHub/ConverterApp/ConverterApp/img/backgroundimage.jpg"); // Cambia la ruta por la ubicación de tu imagen
+        Image imgBackground = backgroundImage.getImage();
+        Image imgScaledBackground = imgBackground.getScaledInstance(getWidth(), getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon scaledBackgroundIcon = new ImageIcon(imgScaledBackground);
+
+		// implementar imagen de fondo a la App
+		panelPrincipal = new JPanel() {
+			private static final long serialVersionUID = 1L;
+
+			@Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(scaledBackgroundIcon.getImage(), 0, 0, null);
+            }
+        };
+		panelPrincipal.setOpaque(false);
 		
-		panelPrincipal = new JPanel();
 		panelPrincipal.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(panelPrincipal);
 		
 		
 		JPanel panelMenu = new JPanel();
+		panelMenu.setOpaque(false);
 		
 		JPanel panelCurrency = new JPanel();
+		panelCurrency.setOpaque(false);
 		panelCurrency.setVisible(false);
 		panelCurrency.setLayout(null);
 	    
 		JPanel panelUnits = new JPanel();
+		panelUnits.setOpaque(false);
 		panelUnits.setVisible(false);
 		panelUnits.setLayout(null);
 		
 		JPanel panelImage = new JPanel();
+		panelImage.setOpaque(false);
 		panelImage.setVisible(true);  
 		panelImage.setLayout(null);
 		
@@ -134,19 +157,22 @@ public class ConverterWindow extends JFrame {
 ////////// componentes del menu principal
 
 		JLabel lblTitle = new JLabel("Converter APP");
-		lblTitle.setFont(new Font("SansSerif", Font.BOLD, 24));
+		lblTitle.setForeground(new Color(0, 0, 0));
+		lblTitle.setFont(new Font("SansSerif", Font.BOLD, 26));
 		lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTitle.setBounds(6, 177, 218, 36);
 		panelMenu.add(lblTitle);
 
 		JButton lblMenu = new JButton("Menú Principal");
+		lblMenu.setForeground(new Color(0, 0, 0));
 		lblMenu.setBorder(new EmptyBorder(0, 0, 0, 0));
-		lblMenu.setFont(new Font("SansSerif", Font.PLAIN, 14));
+		lblMenu.setFont(new Font("SansSerif", Font.BOLD, 16));
 		lblMenu.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMenu.setBounds(6, 238, 218, 16);
 		panelMenu.add(lblMenu);
 
 		JButton btnCurrency = new JButton("Conversor de Moneda");
+		btnCurrency.setBackground(new Color(0, 127, 255));
 		btnCurrency.setBounds(6, 301, 218, 43);
 		panelMenu.add(btnCurrency);
 
@@ -156,8 +182,9 @@ public class ConverterWindow extends JFrame {
 		panelPrincipal.setLayout(gl_panelPrincipal);
 		
 		JButton btnFinish = new JButton("Finalizar Aplicación");
+		btnFinish.setForeground(new Color(0, 0, 0));
 		btnFinish.setBorder(new EmptyBorder(0, 0, 0, 0));
-		btnFinish.setFont(new Font("SansSerif", Font.ITALIC, 13));
+		btnFinish.setFont(new Font("SansSerif", Font.BOLD | Font.ITALIC, 16));
 		
 		
 		btnFinish.setBounds(6, 408, 212, 43);
@@ -165,7 +192,7 @@ public class ConverterWindow extends JFrame {
 		
 		JLabel lblAutor = new JLabel("@JennyMunera");
 		lblAutor.setHorizontalAlignment(SwingConstants.CENTER);
-		lblAutor.setFont(new Font("SansSerif", Font.ITALIC, 13));
+		lblAutor.setFont(new Font("SansSerif", Font.BOLD | Font.ITALIC, 16));
 		lblAutor.setBounds(6, 702, 218, 16);
 		panelMenu.add(lblAutor);
 		
@@ -175,7 +202,7 @@ public class ConverterWindow extends JFrame {
 
 		JLabel lblTitleCurrency = new JLabel("CONVERSOR DE MONEDA");
 		lblTitleCurrency.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTitleCurrency.setFont(new Font("SansSerif", Font.PLAIN, 26));
+		lblTitleCurrency.setFont(new Font("SansSerif", Font.BOLD, 26));
 		lblTitleCurrency.setBounds(6, 6, 517, 43);
 		panelCurrency.add(lblTitleCurrency);
 
@@ -224,6 +251,7 @@ public class ConverterWindow extends JFrame {
 
 		JButton invertButton = new JButton("");
 		invertButton.setBorder(new EmptyBorder(0, 0, 0, 0));
+		invertButton.setOpaque(true);
 		invertButton.setBounds(226, 343, 70, 70);
 		panelCurrency.add(invertButton);
 
@@ -252,6 +280,7 @@ public class ConverterWindow extends JFrame {
 		panelCurrency.add(convertButton);
 		
 		JTextPane textResult = new JTextPane();
+		textResult.setOpaque(false);
 		textResult.setEditable(false);
 		textResult.setBackground(new Color(238, 238, 238));
 		textResult.setFont(new Font("SansSerif", Font.BOLD | Font.ITALIC, 14));
@@ -261,13 +290,14 @@ public class ConverterWindow extends JFrame {
 		
 ////////componentes del conversor de longitud
 		JPanel panelLength = new JPanel();
-		panelLength.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		panelLength.setOpaque(false);
+		panelLength.setBorder(new LineBorder(new Color(255, 255, 255), 1, true));
 		panelLength.setBounds(421, 6, 316, 347);
 		panelUnits.add(panelLength);
 		panelLength.setLayout(null);
 		
 		JLabel lblLength = new JLabel("LONGITUD");
-		lblLength.setFont(new Font("SansSerif", Font.PLAIN, 16));
+		lblLength.setFont(new Font("SansSerif", Font.BOLD, 16));
 		lblLength.setHorizontalAlignment(SwingConstants.CENTER);
 		lblLength.setBounds(6, 6, 304, 23);
 		panelLength.add(lblLength);
@@ -279,7 +309,7 @@ public class ConverterWindow extends JFrame {
 		TextLength.setColumns(10);
 		
 		JLabel lblLength1 = new JLabel("Ingrese el valor de longitud");
-		lblLength1.setFont(new Font("SansSerif", Font.PLAIN, 13));
+		lblLength1.setFont(new Font("SansSerif", Font.BOLD | Font.ITALIC, 13));
 		lblLength1.setEnabled(false);
 		lblLength1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblLength1.setBounds(6, 37, 304, 16);
@@ -288,7 +318,7 @@ public class ConverterWindow extends JFrame {
 		JLabel lblLength2 = new JLabel("Unidad de longitud inicial");
 		lblLength2.setEnabled(false);
 		lblLength2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblLength2.setFont(new Font("SansSerif", Font.PLAIN, 13));
+		lblLength2.setFont(new Font("SansSerif", Font.BOLD | Font.ITALIC, 13));
 		lblLength2.setBounds(6, 94, 304, 23);
 		panelLength.add(lblLength2);
 		
@@ -300,6 +330,7 @@ public class ConverterWindow extends JFrame {
 		panelLength.add(LengthUnits1);
 		
 		JButton btnInverLeng = new JButton("");
+		btnInverLeng.setOpaque(true);
 		btnInverLeng.setBorder(new EmptyBorder(0, 0, 0, 0));
 		btnInverLeng.setBounds(137, 146, 40, 40);
 		panelLength.add(btnInverLeng);
@@ -312,7 +343,7 @@ public class ConverterWindow extends JFrame {
 		btnInverLeng.setIcon(scaledInvertleng);
 		
 		JLabel lblLength3 = new JLabel("Unidad de Longitud final");
-		lblLength3.setFont(new Font("SansSerif", Font.PLAIN, 13));
+		lblLength3.setFont(new Font("SansSerif", Font.BOLD | Font.ITALIC, 13));
 		lblLength3.setHorizontalAlignment(SwingConstants.CENTER);
 		lblLength3.setEnabled(false);
 		lblLength3.setBounds(6, 187, 304, 16);
@@ -325,6 +356,7 @@ public class ConverterWindow extends JFrame {
 		panelLength.add(LengthUnits2);
 		
 		JTextPane textResutlLength = new JTextPane();
+		textResutlLength.setOpaque(false);
 		textResutlLength.setFont(new Font("SansSerif", Font.PLAIN, 13));
 		textResutlLength.setBackground(new Color(238, 238, 238));
 		textResutlLength.setBounds(6, 280, 304, 50);
@@ -337,14 +369,15 @@ public class ConverterWindow extends JFrame {
 		
 ////////componentes conversor de temperatura		
 		JPanel panelTemp = new JPanel();
-		panelTemp.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		panelTemp.setOpaque(false);
+		panelTemp.setBorder(new LineBorder(new Color(255, 255, 255), 1, true));
 		panelTemp.setLayout(null);
 		panelTemp.setBounds(47, 6, 316, 347);
 		panelUnits.add(panelTemp);
 		
 		JLabel lblTemp = new JLabel("TEMPERATURA");
 		lblTemp.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTemp.setFont(new Font("SansSerif", Font.PLAIN, 16));
+		lblTemp.setFont(new Font("SansSerif", Font.BOLD, 16));
 		lblTemp.setBounds(6, 6, 304, 23);
 		panelTemp.add(lblTemp);
 		
@@ -356,14 +389,14 @@ public class ConverterWindow extends JFrame {
 		
 		JLabel lblTemp1 = new JLabel("Ingrese el valor de temperatura");
 		lblTemp1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTemp1.setFont(new Font("SansSerif", Font.PLAIN, 13));
+		lblTemp1.setFont(new Font("SansSerif", Font.BOLD | Font.ITALIC, 13));
 		lblTemp1.setEnabled(false);
 		lblTemp1.setBounds(6, 37, 304, 16);
 		panelTemp.add(lblTemp1);
 		
 		JLabel lblTemp2 = new JLabel("Unidad de temperatura inicial");
 		lblTemp2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTemp2.setFont(new Font("SansSerif", Font.PLAIN, 13));
+		lblTemp2.setFont(new Font("SansSerif", Font.BOLD | Font.ITALIC, 13));
 		lblTemp2.setEnabled(false);
 		lblTemp2.setBounds(6, 94, 304, 23);
 		panelTemp.add(lblTemp2);
@@ -375,6 +408,7 @@ public class ConverterWindow extends JFrame {
 		panelTemp.add(TempUnits1);
 		
 		JButton btnInvertemp = new JButton("");
+		btnInvertemp.setOpaque(true);
 		btnInvertemp.setBorder(new EmptyBorder(0, 0, 0, 0));
 		btnInvertemp.setBounds(137, 143, 40, 40);
 		panelTemp.add(btnInvertemp);
@@ -387,7 +421,7 @@ public class ConverterWindow extends JFrame {
 		btnInvertemp.setIcon(scaledInvertemp);
 		
 		JLabel lblTemp3 = new JLabel("Unidad de temperatura final");
-		lblTemp3.setFont(new Font("SansSerif", Font.PLAIN, 13));
+		lblTemp3.setFont(new Font("SansSerif", Font.BOLD | Font.ITALIC, 13));
 		lblTemp3.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTemp3.setEnabled(false);
 		lblTemp3.setBounds(6, 186, 304, 16);
@@ -401,6 +435,7 @@ public class ConverterWindow extends JFrame {
 		panelTemp.add(TempUnits2);
 		
 		JTextPane textResultTemp = new JTextPane();
+		textResultTemp.setOpaque(false);
 		textResultTemp.setFont(new Font("SansSerif", Font.PLAIN, 13));
 		textResultTemp.setBackground(UIManager.getColor("Button.background"));
 		textResultTemp.setBounds(6, 280, 304, 50);
@@ -414,14 +449,15 @@ public class ConverterWindow extends JFrame {
 ////////componentes conversor de masa
 		
 		JPanel panelWeight = new JPanel();
-		panelWeight.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		panelWeight.setOpaque(false);
+		panelWeight.setBorder(new LineBorder(new Color(255, 255, 255), 1, true));
 		panelWeight.setLayout(null);
 		panelWeight.setBounds(47, 371, 316, 347);
 		panelUnits.add(panelWeight);
 		
 		JLabel lblWeight = new JLabel("MASA");
 		lblWeight.setHorizontalAlignment(SwingConstants.CENTER);
-		lblWeight.setFont(new Font("SansSerif", Font.PLAIN, 16));
+		lblWeight.setFont(new Font("SansSerif", Font.BOLD, 16));
 		lblWeight.setBounds(6, 6, 304, 23);
 		panelWeight.add(lblWeight);
 		
@@ -433,14 +469,14 @@ public class ConverterWindow extends JFrame {
 		
 		JLabel lblWeight1 = new JLabel("Ingrese el valor");
 		lblWeight1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblWeight1.setFont(new Font("SansSerif", Font.PLAIN, 13));
+		lblWeight1.setFont(new Font("SansSerif", Font.BOLD | Font.ITALIC, 13));
 		lblWeight1.setEnabled(false);
 		lblWeight1.setBounds(6, 37, 304, 16);
 		panelWeight.add(lblWeight1);
 		
 		JLabel lblLWeight2 = new JLabel("Unidad de masa inicial");
 		lblLWeight2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblLWeight2.setFont(new Font("SansSerif", Font.PLAIN, 13));
+		lblLWeight2.setFont(new Font("SansSerif", Font.BOLD | Font.ITALIC, 13));
 		lblLWeight2.setEnabled(false);
 		lblLWeight2.setBounds(6, 94, 304, 23);
 		panelWeight.add(lblLWeight2);
@@ -452,6 +488,7 @@ public class ConverterWindow extends JFrame {
 		panelWeight.add(WeightUnits1);
 		
 		JButton btnInverWeight = new JButton("");
+		btnInverWeight.setOpaque(true);
 		btnInverWeight.setBorder(new EmptyBorder(0, 0, 0, 0));
 		btnInverWeight.setBounds(137, 146, 40, 40);
 		panelWeight.add(btnInverWeight);
@@ -465,7 +502,7 @@ public class ConverterWindow extends JFrame {
 		
 		JLabel lblWeight3 = new JLabel("Unidad de masa final");
 		lblWeight3.setHorizontalAlignment(SwingConstants.CENTER);
-		lblWeight3.setFont(new Font("SansSerif", Font.PLAIN, 13));
+		lblWeight3.setFont(new Font("SansSerif", Font.BOLD | Font.ITALIC, 13));
 		lblWeight3.setEnabled(false);
 		lblWeight3.setBounds(6, 187, 304, 16);
 		panelWeight.add(lblWeight3);
@@ -477,6 +514,7 @@ public class ConverterWindow extends JFrame {
 		panelWeight.add(WeightUnits2);
 		
 		JTextPane textResutlWeight = new JTextPane();
+		textResutlWeight.setOpaque(false);
 		textResutlWeight.setFont(new Font("SansSerif", Font.PLAIN, 13));
 		textResutlWeight.setBackground(UIManager.getColor("Button.background"));
 		textResutlWeight.setBounds(6, 280, 304, 50);
