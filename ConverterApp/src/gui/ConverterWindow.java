@@ -63,8 +63,7 @@ public class ConverterWindow extends JFrame {
 	public ConverterWindow(CurrencyApi currencyApi) {
 		this.currencyApi = currencyApi;
 
-		// TODO DESCOMENTAR todo lo relacionado con panelImage y lbllblImagenInicio
-
+		
 ///////// configurar JFrame 
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -87,9 +86,9 @@ public class ConverterWindow extends JFrame {
 		panelUnits.setVisible(false);
 		panelUnits.setLayout(null);
 		
-		//JPanel panelImage = new JPanel();
-		//panelImage.setVisible(true);  
-		//panelImage.setLayout(null);
+		JPanel panelImage = new JPanel();
+		panelImage.setVisible(true);  
+		panelImage.setLayout(null);
 		
 		GroupLayout gl_panelPrincipal = new GroupLayout(panelPrincipal);
 		gl_panelPrincipal.setHorizontalGroup(
@@ -97,7 +96,7 @@ public class ConverterWindow extends JFrame {
 				.addGroup(gl_panelPrincipal.createSequentialGroup()
 					.addComponent(panelMenu, GroupLayout.PREFERRED_SIZE, 224, GroupLayout.PREFERRED_SIZE)
 					.addGap(12)
-					//.addComponent(panelImage, GroupLayout.PREFERRED_SIZE, 780, GroupLayout.PREFERRED_SIZE)
+					.addComponent(panelImage, GroupLayout.PREFERRED_SIZE, 780, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(panelUnits, GroupLayout.PREFERRED_SIZE, 773, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -111,25 +110,25 @@ public class ConverterWindow extends JFrame {
 						.addComponent(panelMenu, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 724, Short.MAX_VALUE)
 						.addComponent(panelCurrency, GroupLayout.DEFAULT_SIZE, 724, Short.MAX_VALUE)
 						.addComponent(panelUnits, GroupLayout.DEFAULT_SIZE, 724, Short.MAX_VALUE)
-						//.addComponent(panelImage, GroupLayout.DEFAULT_SIZE, 724, Short.MAX_VALUE))
-					).addContainerGap())
+						.addComponent(panelImage, GroupLayout.DEFAULT_SIZE, 724, Short.MAX_VALUE))
+					.addContainerGap())
 		);
 		
 		
-		/*
+		
 		JLabel lblImagenInicio = new JLabel("");
 		lblImagenInicio.setOpaque(true);
 		lblImagenInicio.setFocusTraversalPolicyProvider(true);
 		lblImagenInicio.setBounds(0, 0, 774, 718);
 		lblImagenInicio.setHorizontalTextPosition(SwingConstants.CENTER);
-		//panelImage.add(lblImagenInicio);
+		panelImage.add(lblImagenInicio);
 		
 		ImageIcon iconInicio = new ImageIcon("/Users/jennymunera/Documents/GitHub/ConverterApp/ConverterApp/img/challengeImage.jpg"); 
 		Image imgInicio = iconInicio.getImage();
 		Image imgScaledInicio = imgInicio.getScaledInstance(lblImagenInicio.getWidth(), lblImagenInicio.getHeight(), Image.SCALE_SMOOTH);
 		ImageIcon ScaledIconInicio = new ImageIcon(imgScaledInicio);
 		lblImagenInicio.setIcon(ScaledIconInicio);
-		*/
+		
 		
 
 ////////// componentes del menu principal
@@ -156,6 +155,20 @@ public class ConverterWindow extends JFrame {
 		panelMenu.add(btnUnits);
 		panelPrincipal.setLayout(gl_panelPrincipal);
 		
+		JButton btnFinish = new JButton("Finalizar Aplicación");
+		btnFinish.setBorder(new EmptyBorder(0, 0, 0, 0));
+		btnFinish.setFont(new Font("SansSerif", Font.ITALIC, 13));
+		
+		
+		btnFinish.setBounds(6, 408, 212, 43);
+		panelMenu.add(btnFinish);
+		
+		JLabel lblAutor = new JLabel("@JennyMunera");
+		lblAutor.setHorizontalAlignment(SwingConstants.CENTER);
+		lblAutor.setFont(new Font("SansSerif", Font.ITALIC, 13));
+		lblAutor.setBounds(6, 702, 218, 16);
+		panelMenu.add(lblAutor);
+		
 		
 
 ///////// componentes del conversor de moneda
@@ -173,13 +186,6 @@ public class ConverterWindow extends JFrame {
 		panelCurrency.add(lblimgCurrency);
 		panelMenu.setLayout(null);
 		
-		JButton btnFinish = new JButton("Finalizar Programa");
-		btnFinish.setBorder(new EmptyBorder(0, 0, 0, 0));
-		btnFinish.setFont(new Font("SansSerif", Font.ITALIC, 13));
-		
-		
-		btnFinish.setBounds(6, 408, 212, 43);
-		panelMenu.add(btnFinish);
 
 		ImageIcon icon = new ImageIcon(
 				"/Users/jennymunera/Documents/GitHub/ConverterApp/ConverterApp/img/Currencyicon.png");
@@ -491,7 +497,7 @@ public class ConverterWindow extends JFrame {
 		 lblMenu.addActionListener(new ActionListener() {
 		        @Override
 		        public void actionPerformed(ActionEvent e) {
-		        //	panelImage.setVisible(true);
+		        	panelImage.setVisible(true);
 		            panelCurrency.setVisible(false);
 		            panelUnits.setVisible(false);
 		        }
@@ -502,7 +508,7 @@ public class ConverterWindow extends JFrame {
 	    btnCurrency.addActionListener(new ActionListener() {
 	        @Override
 	        public void actionPerformed(ActionEvent e) {
-	        	//panelImage.setVisible(false);
+	        	panelImage.setVisible(false);
 	            panelCurrency.setVisible(true);
 	            panelUnits.setVisible(false);
 	        }
@@ -514,7 +520,7 @@ public class ConverterWindow extends JFrame {
 	        public void actionPerformed(ActionEvent e) {
 	            panelUnits.setVisible(true);
 	            panelCurrency.setVisible(false);
-	           // panelImage.setVisible(false);
+	            panelImage.setVisible(false);
 	        }
 	    });
 
@@ -525,7 +531,7 @@ public class ConverterWindow extends JFrame {
 		convertButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// Obtiene los datos ingresados por el usuario
+				
 				String fromCurrency = getCurrencyCode(fromcurrencyComboBox.getSelectedItem().toString());
 				String toCurrency = getCurrencyCode(toCurrencyComboBox.getSelectedItem().toString());
 				
@@ -535,12 +541,12 @@ public class ConverterWindow extends JFrame {
 			    try {
 		            amount = Double.parseDouble(amountTextField.getText());
 		        } catch (NumberFormatException ex) {
-		            // Si no se ingresó un número válido, mostrar un mensaje de error
+		            
 		            JOptionPane.showMessageDialog(null, "Error: Ingrese solo números en el campo de cantidad.", "Error de entrada", JOptionPane.ERROR_MESSAGE);
 		            return;
 		        }
 
-				// Realiza la conversión utilizando el valor de cambio de las monedas
+				
 				double fromRate = currencyApi.getExchangeRate(fromCurrency);
 				double toRate = currencyApi.getExchangeRate(toCurrency);
 				double convertedAmount = (amount / fromRate) * toRate;
@@ -551,7 +557,7 @@ public class ConverterWindow extends JFrame {
  
 
 				// Muestra el resultado de la conversión 
-				// JOptionPane.showMessageDialog(null, amount + " " + fromCurrency + " = " + convertedAmount + " " + toCurrency);
+				
 				textResult.setText("La cantidad ingresada: "+amount + "  " + fromCurrency + " corresponde a = " + convertedAmount + " " + toCurrency);
 			}
 
@@ -603,28 +609,25 @@ public class ConverterWindow extends JFrame {
 		btnconverTemp.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String tempInput = textTemp.getText();
-			    if (tempInput.isEmpty()) {
-			    textResultTemp.setText("");
-			        return; // No hay nada que convertir si el campo de texto está vacío
-			    }
+				try {
+					String tempInput = textTemp.getText();
+					if (tempInput.isEmpty()) {
+					    textResultTemp.setText("");
+					        return; // No hay nada que convertir si el campo de texto está vacío
+					}
+					if (!tempInput.matches("\\d*\\.?\\d+")) {
+		                throw new NumberFormatException("Entrada Invalida: por favor ingrese un numero valido.");
+		            }
+					double tempValue = Double.parseDouble(tempInput);
 
-			    double tempValue;
-			    try {
-			        tempValue = Double.parseDouble(tempInput);
-			    } catch (NumberFormatException ex) {
-			    	JOptionPane.showMessageDialog(null, "Error: Ingrese solo números en el campo de cantidad.", "Error de entrada", JOptionPane.ERROR_MESSAGE);
-			        return;
-			    }
-				
-	                String selectedUnit1 = TempUnits1.getSelectedItem().toString();
-	                String selectedUnit2 = TempUnits2.getSelectedItem().toString();
-	                
-	                if(selectedUnit1.equals(selectedUnit2)){
-	                	JOptionPane.showMessageDialog(null,"No se puede convertir a la misma unidad de temperatura, verifica las selecciones","Error de unidades",JOptionPane.ERROR_MESSAGE);
-	                }else{
+		            String selectedUnit1 = TempUnits1.getSelectedItem().toString();
+		            String selectedUnit2 = TempUnits2.getSelectedItem().toString();
 
-	                double result = 0.0;
+		            if (selectedUnit1.equals(selectedUnit2)) {
+		                throw new IllegalArgumentException("No se puede convertir a la misma unidad de temperatura, verifica las selecciones");
+		            }
+
+		            double result = 0.0;
 
 	                if (selectedUnit1.equals("ºC - Celsius")) {
 	                    if (selectedUnit2.equals("ºF - Fahrenheit ")) {
@@ -647,8 +650,13 @@ public class ConverterWindow extends JFrame {
 	                }
 
 	                textResultTemp.setText("la temperatura ingresada: "+tempValue+" "+selectedUnit1+" es igual a: "+String.valueOf(result)+ " "+selectedUnit2);
-	            }
-			}
+
+		        } catch (NumberFormatException ex) {
+		            JOptionPane.showMessageDialog(null, "Entrada Invalida: por favor ingrese un numero valido.", "Input Error", JOptionPane.ERROR_MESSAGE);
+		        } catch (IllegalArgumentException ex) {
+		            JOptionPane.showMessageDialog(null, ex.getMessage(), "Conversion Error", JOptionPane.ERROR_MESSAGE);
+		        }
+		    }
 		});
 		
 		btnInvertemp.addActionListener(new ActionListener() {
@@ -694,22 +702,27 @@ public class ConverterWindow extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-		            double inputValue = Double.parseDouble(TextLength.getText());
+					String tempInput = TextLength.getText();
+		            if (!tempInput.matches("\\d*\\.?\\d+")) {
+		                throw new NumberFormatException("Entrada Invalida: por favor ingrese un numero valido.");
+		            }
+
+					double inputValue = Double.parseDouble(TextLength.getText());
 		            String fromUnit = (String) LengthUnits1.getSelectedItem();
 		            String toUnit = (String) LengthUnits2.getSelectedItem();
 
 		            if (fromUnit.equals(toUnit)) {
-		            	JOptionPane.showMessageDialog(null,"No se puede convertir a la misma unidad de longitud, verifica las selecciones","Error de unidades",JOptionPane.ERROR_MESSAGE);
-		                return;
+		            	throw new IllegalArgumentException("No se puede convertir a la misma unidad de longitud, verifica las selecciones");
+		                
 		            }
 		            double result = LengthConverter.convertLength(inputValue, fromUnit, toUnit);
-
-		         
+		           
 		            textResutlLength.setText("La Longitud ingresada: "+inputValue + "  " + fromUnit + " corresponde a = " + result + " " + toUnit);
 		        } catch (NumberFormatException ex) {
 		        	JOptionPane.showMessageDialog(null, "Error: Ingrese solo números en el campo de cantidad.", "Error de entrada", JOptionPane.ERROR_MESSAGE);
 		        }catch (IllegalArgumentException ex) {
-		        	JOptionPane.showMessageDialog(null,ex.getMessage());
+		        	JOptionPane.showMessageDialog(null,ex.getMessage(),"Error de unidades", JOptionPane.ERROR_MESSAGE);
+		        
 		        }
 				
 			}
@@ -756,56 +769,57 @@ public class ConverterWindow extends JFrame {
 		btnConvertWeight.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String weightInput = textWeight.getText();
-			    if (weightInput.isEmpty()) {
-			    	textResutlWeight.setText("");
-			        return; 
-			    }
+				try {
+					String weightInput = textWeight.getText();
+					if (weightInput.isEmpty()) {
+						textResutlWeight.setText("");
+						return; 
+					}
+					if (!weightInput.matches("\\d*\\.?\\d+")) {
+						throw new NumberFormatException("Entrada Invalida: por favor ingrese un número valido");
+					}
+					double weightValue = Double.parseDouble(weightInput);
+					String selectedWeight1 = WeightUnits1.getSelectedItem().toString();
+					String selectedWeight2 = WeightUnits2.getSelectedItem().toString();
 
-			    double weightValue;
-			    try {
-			    	weightValue = Double.parseDouble(weightInput);
-			    } catch (NumberFormatException ex) {
-			    	JOptionPane.showMessageDialog(null, "Error: Ingrese solo números en el campo de cantidad.", "Error de entrada", JOptionPane.ERROR_MESSAGE);
-			        return;
-			    }
-				
-	                String selectedWeight1 = WeightUnits1.getSelectedItem().toString();
-	                String selectedWeight2 = WeightUnits2.getSelectedItem().toString();
-	                
-	                if(selectedWeight1.equals(selectedWeight2)){
-	                	JOptionPane.showMessageDialog(null,"No se puede convertir a la misma unidad de masa, verifica las selecciones","Error de unidades",JOptionPane.ERROR_MESSAGE);
-	                }else{
 
-	                double result = 0.0;
+					if(selectedWeight1.equals(selectedWeight2)){
+						throw new IllegalArgumentException("No se puede convertir a la misma unidad de masa, verifica las selecciones");
+					}
+					double result = 0.0;
 
-	                if (selectedWeight1.equals("Kilogramos") && selectedWeight2.equals("Libras")) {
-	                    result = WeightConverter.convertKilogramsToPounds(weightValue);
-	                } else if (selectedWeight1.equals("Libras") && selectedWeight2.equals("Kilogramos")) {
-	                    result = WeightConverter.convertPoundsToKilograms(weightValue);
-	                } else if (selectedWeight1.equals("Kilogramos") && selectedWeight2.equals("Onzas")) {
-	                    result = WeightConverter.convertKilogramsToOunces(weightValue);
-	                } else if (selectedWeight1.equals("Onzas") && selectedWeight2.equals("Kilogramos")) {
-	                    result = WeightConverter.convertOuncesToKilograms(weightValue);
-	                } else if (selectedWeight1.equals("Kilogramos") && selectedWeight2.equals("Gramos")) {
-	                    result = WeightConverter.convertKilogramsToGrams(weightValue);
-	                } else if (selectedWeight1.equals("Gramos") && selectedWeight2.equals("Kilogramos")) {
-	                    result = WeightConverter.convertGramsToKilograms(weightValue);
-	                } else if (selectedWeight1.equals("Kilogramos") && selectedWeight2.equals("Miligramos")) {
-	                    result = WeightConverter.convertKilogramsToMilligrams(weightValue);
-	                } else if (selectedWeight1.equals("Miligramos") && selectedWeight2.equals("Kilogramos")) {
-	                    result = WeightConverter.convertMilligramsToKilograms(weightValue);
-	                } else if (selectedWeight1.equals("Kilogramos") && selectedWeight2.equals("Toneladas")) {
-	                    result = WeightConverter.convertKilogramsToTons(weightValue);
-	                } else if (selectedWeight1.equals("Toneladas") && selectedWeight2.equals("Kilogramos")) {
-	                    result = WeightConverter.convertTonsToKilograms(weightValue);
-	                } else {
-	                    // If the input and output units are the same, no conversion is needed.
-	                    result = weightValue;
-	                }
+					if (selectedWeight1.equals("Kilogramos") && selectedWeight2.equals("Libras")) {
+						result = WeightConverter.convertKilogramsToPounds(weightValue);
+					} else if (selectedWeight1.equals("Libras") && selectedWeight2.equals("Kilogramos")) {
+						result = WeightConverter.convertPoundsToKilograms(weightValue);
+					} else if (selectedWeight1.equals("Kilogramos") && selectedWeight2.equals("Onzas")) {
+						result = WeightConverter.convertKilogramsToOunces(weightValue);
+					} else if (selectedWeight1.equals("Onzas") && selectedWeight2.equals("Kilogramos")) {
+						result = WeightConverter.convertOuncesToKilograms(weightValue);
+					} else if (selectedWeight1.equals("Kilogramos") && selectedWeight2.equals("Gramos")) {
+						result = WeightConverter.convertKilogramsToGrams(weightValue);
+					} else if (selectedWeight1.equals("Gramos") && selectedWeight2.equals("Kilogramos")) {
+						result = WeightConverter.convertGramsToKilograms(weightValue);
+					} else if (selectedWeight1.equals("Kilogramos") && selectedWeight2.equals("Miligramos")) {
+						result = WeightConverter.convertKilogramsToMilligrams(weightValue);
+					} else if (selectedWeight1.equals("Miligramos") && selectedWeight2.equals("Kilogramos")) {
+						result = WeightConverter.convertMilligramsToKilograms(weightValue);
+					} else if (selectedWeight1.equals("Kilogramos") && selectedWeight2.equals("Toneladas")) {
+						result = WeightConverter.convertKilogramsToTons(weightValue);
+					} else if (selectedWeight1.equals("Toneladas") && selectedWeight2.equals("Kilogramos")) {
+						result = WeightConverter.convertTonsToKilograms(weightValue);
+					} else {
+						throw new UnsupportedOperationException("Conversion no Implementada "+  selectedWeight1 + " a " + selectedWeight2);
+					}
 
-	                textResutlWeight.setText("la masa ingresada: "+weightValue+" "+selectedWeight1+" es igual a: "+String.valueOf(result)+ " "+selectedWeight2);
-	            }
+					textResutlWeight.setText("la masa ingresada: "+weightValue+" "+selectedWeight1+" es igual a: "+String.valueOf(result)+ " "+selectedWeight2);
+				} catch (NumberFormatException ex) {
+					JOptionPane.showMessageDialog(null, "Entrada Invalida: por favor ingrese un numero valido.", "Input Error", JOptionPane.ERROR_MESSAGE);
+				} catch (IllegalArgumentException ex) {
+					JOptionPane.showMessageDialog(null, ex.getMessage(), "Error de conversion", JOptionPane.ERROR_MESSAGE);
+				} catch (UnsupportedOperationException ex) {
+					JOptionPane.showMessageDialog(null, ex.getMessage(),"Conversion no Implementada", JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
 		
@@ -824,8 +838,18 @@ public class ConverterWindow extends JFrame {
 		    }
 		});
 
-		
-		
+/////// Evento finalizar aplicacion
+		btnFinish.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int option = JOptionPane.showConfirmDialog(null, "¿Estás seguro de finalizar la aplicación?", "Confirmación", JOptionPane.YES_NO_OPTION);
+                if (option == JOptionPane.YES_OPTION) {
+                    
+                   System.exit(0);
+                }
+            }
+        });
+       
 		
 	}// fin del constructor
 
@@ -845,6 +869,4 @@ public class ConverterWindow extends JFrame {
 		this.weightConverter = weightConverter;
 		
 	}
-	
-	
 }// fin de la clase
