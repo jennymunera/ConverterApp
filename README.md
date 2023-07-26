@@ -45,6 +45,19 @@ JAR OPENCSV_4.1 (gestion de archivos CSV)
 JAR JSON In Java-20230618 ( gestion de archivos Json)
 
 # Demo de la app 
+### Link del repositorio : https://github.com/jennymunera/ConverterApp
+### link del video de la app en funcionamiento: https://youtu.be/cAOX0Q9YGvc
 
+![SCR-20230726-lxhr](https://github.com/jennymunera/ConverterApp/assets/112194662/8cf2f96c-b471-43a1-967a-729800570ffd)
 
+![SCR-20230726-lxvl](https://github.com/jennymunera/ConverterApp/assets/112194662/73629c1f-e9e4-432d-8bd0-99cc35e0fdbb)
 
+![SCR-20230726-lykh](https://github.com/jennymunera/ConverterApp/assets/112194662/70f25db3-7b56-4cc4-873e-dbfdc4e53656)
+
+![SCR-20230726-lznz](https://github.com/jennymunera/ConverterApp/assets/112194662/e69bcc96-cd42-4271-a23c-892f6a370730)
+
+![SCR-20230726-magc](https://github.com/jennymunera/ConverterApp/assets/112194662/046a3209-9ec8-4f31-8580-a61aa7fbd7ee)
+
+## Autor: Jenny Alexandra Munera Serna
+### GITHUB: https://github.com/jennymunera/
+### LINKEDIN: https://www.linkedin.com/in/jenny-alexandra-munera-serna-8938a71a7/
